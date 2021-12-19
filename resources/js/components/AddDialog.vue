@@ -58,7 +58,7 @@
             color="success"
             :disabled="uploading"
             :loading="uploading"
-            @click="submit()"
+            @click="submitPhoto()"
           >
             Submit
           </v-btn>
@@ -76,7 +76,7 @@ export default {
     uploading: false,
   }),
   methods: {
-    submit() {},
+    submitPhoto() {},
   },
 };
 </script>

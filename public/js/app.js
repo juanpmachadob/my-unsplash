@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    submit: function submit() {}
+    submitPhoto: function submitPhoto() {}
   }
 });
 
@@ -156,10 +156,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -194,8 +194,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ImageContainer"
+  name: "DeleteDialog",
+  data: function data() {
+    return {
+      dialog: false,
+      uploading: false
+    };
+  },
+  methods: {
+    deletePhoto: function deletePhoto() {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteDialog_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteDialog.vue */ "./resources/js/components/DeleteDialog.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "ImageContainer",
+  components: {
+    DeleteDialog: _DeleteDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
 });
 
 /***/ }),
@@ -263,7 +351,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use((vuetify__WEBPACK_IMPORTED_MODUL
         primary: "#3f51b5",
         secondary: "#696969",
         accent: "#8c9eff",
-        error: "#b71c1c"
+        danger: "#b71c1c"
       }
     }
   }
@@ -312,7 +400,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hover-photo .v-image__image,\r\n.d-flex.photo-content {\r\n  transition: all 0.3s;\n}\n.d-flex.photo-content {\r\n  visibility: hidden;\r\n  opacity: 0;\n}\n.hover-photo:hover .d-flex.photo-content {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  box-shadow: 0 0 200px rgba(0,0,0,0.75) inset;\n}\n.hover-photo:hover .v-image__image {\r\n  transform: scale(1.025);\r\n  transition: all 0.3s;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.hover-photo .v-image__image,\r\n.d-flex.photo-content {\r\n  transition: all 0.3s;\n}\n.d-flex.photo-content {\r\n  visibility: hidden;\r\n  opacity: 0;\n}\n.hover-photo:hover .d-flex.photo-content {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  box-shadow: 0 0 200px rgba(0, 0, 0, 0.75) inset;\n}\n.hover-photo:hover .v-image__image {\r\n  transform: scale(1.025);\r\n  transition: all 0.3s;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -864,6 +952,45 @@ component.options.__file = "resources/js/components/AppBar.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/DeleteDialog.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/DeleteDialog.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteDialog.vue?vue&type=template&id=84d1d584& */ "./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584&");
+/* harmony import */ var _DeleteDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteDialog.vue?vue&type=script&lang=js& */ "./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DeleteDialog.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ImageContainer.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/ImageContainer.vue ***!
@@ -953,6 +1080,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ImageContainer.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/ImageContainer.vue?vue&type=script&lang=js& ***!
@@ -1029,6 +1172,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppBar_vue_vue_type_template_id_abd0e146___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppBar_vue_vue_type_template_id_abd0e146___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppBar.vue?vue&type=template&id=abd0e146& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AppBar.vue?vue&type=template&id=abd0e146&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteDialog_vue_vue_type_template_id_84d1d584___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteDialog.vue?vue&type=template&id=84d1d584& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584&");
 
 
 /***/ }),
@@ -1271,7 +1431,7 @@ var render = function () {
                       },
                       on: {
                         click: function ($event) {
-                          return _vm.submit()
+                          return _vm.submitPhoto()
                         },
                       },
                     },
@@ -1333,6 +1493,167 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DeleteDialog.vue?vue&type=template&id=84d1d584& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-btn",
+        {
+          staticClass: "rounded-lg",
+          attrs: { disabled: _vm.dialog, color: "red darken-2", outlined: "" },
+          on: {
+            click: function ($event) {
+              _vm.dialog = true
+            },
+          },
+        },
+        [_c("v-icon", [_vm._v("mdi-delete")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500px", persistent: "" },
+          model: {
+            value: _vm.dialog,
+            callback: function ($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog",
+          },
+        },
+        [
+          _c(
+            "v-card",
+            { staticClass: "rounded-lg" },
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "text-h5" }, [
+                  _vm._v("Delete photo"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", align: "center" } },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  "max-width": "250px",
+                                  src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Password*",
+                                  type: "password",
+                                  required: "",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "rounded-lg",
+                      attrs: { color: "secondary", disabled: _vm.uploading },
+                      on: {
+                        click: function ($event) {
+                          _vm.dialog = false
+                        },
+                      },
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "rounded-lg",
+                      attrs: {
+                        color: "danger",
+                        dark: "",
+                        disabled: _vm.uploading,
+                        loading: _vm.uploading,
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.deletePhoto()
+                        },
+                      },
+                    },
+                    [_vm._v("\n          Delete\n        ")]
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=template&id=7fb36191&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImageContainer.vue?vue&type=template&id=7fb36191& ***!
@@ -1381,22 +1702,7 @@ var render = function () {
                         [
                           _c(
                             "v-card-actions",
-                            [
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c(
-                                "v-chip",
-                                {
-                                  attrs: {
-                                    close: "",
-                                    "close-icon": "mdi-delete",
-                                    color: "red",
-                                    outlined: "",
-                                  },
-                                },
-                                [_vm._v("Delete")]
-                              ),
-                            ],
+                            [_c("v-spacer"), _vm._v(" "), _c("delete-dialog")],
                             1
                           ),
                           _vm._v(" "),

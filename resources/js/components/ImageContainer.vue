@@ -10,9 +10,7 @@
             <div class="d-flex flex-column photo-content" style="height: 100%">
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-chip close close-icon="mdi-delete" color="red" outlined
-                  >Delete</v-chip
-                >
+                <delete-dialog />
               </v-card-actions>
               <v-card-title class="mt-auto"
                 >Top 10 Australian beaches</v-card-title
@@ -26,8 +24,12 @@
 </template>
 
 <script>
+import DeleteDialog from "./DeleteDialog.vue";
 export default {
   name: "ImageContainer",
+  components: {
+    DeleteDialog,
+  },
 };
 </script>
 
@@ -43,7 +45,7 @@ export default {
 .hover-photo:hover .d-flex.photo-content {
   visibility: visible;
   opacity: 1;
-  box-shadow: 0 0 200px rgba(0,0,0,0.75) inset;
+  box-shadow: 0 0 200px rgba(0, 0, 0, 0.75) inset;
 }
 .hover-photo:hover .v-image__image {
   transform: scale(1.025);
