@@ -1,18 +1,15 @@
 <template>
   <v-app app>
-    <AppBar/>
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <app-bar />
+    <v-content>
+      <image-container></image-container>
+      <!-- <router-view></router-view> -->
+    </v-content>
   </v-app>
 </template>
 
 <script>
-import AppBar from "./components/AppBar.vue";
 export default {
   name: "App",
-  components: {
-    AppBar
-  }
 };
 </script>

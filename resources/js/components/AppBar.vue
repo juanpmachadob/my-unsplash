@@ -1,6 +1,6 @@
 <template>
-  <v-app-bar app dark color="primary">
-    <v-toolbar-title>Title</v-toolbar-title>
+  <v-app-bar app light color="white" elevate-on-scroll>
+    <v-toolbar-title>My unsplash</v-toolbar-title>
     <v-spacer></v-spacer>
     <add-dialog/>
   </v-app-bar>

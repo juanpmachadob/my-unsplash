@@ -3,14 +3,14 @@
     <v-btn
       :disabled="dialog"
       color="success"
-      class="ma-2"
+      class="ma-2 rounded-lg"
       @click="dialog = true"
     >
       Add a photo
-      <v-icon right dark> mdi-cloud-upload </v-icon>
+      <v-icon right dark> mdi-image-plus </v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="500px" persistent>
-      <v-card>
+      <v-card class="rounded-lg">
         <v-card-title>
           <span class="text-h5">Add a new photo</span>
         </v-card-title>
@@ -50,10 +50,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="secondary" :disabled="uploading" @click="dialog = false"
+          <v-btn class="rounded-lg" color="secondary" :disabled="uploading" @click="dialog = false"
             >Cancel</v-btn
           >
           <v-btn
+            class="rounded-lg"
             color="success"
             :disabled="uploading"
             :loading="uploading"
