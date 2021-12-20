@@ -18,7 +18,7 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Label*" required></v-text-field>
+                <v-text-field v-model="label" label="Label*" required></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-radio-group v-model="type" row>
@@ -35,10 +35,11 @@
                 </v-radio-group>
               </v-col>
               <v-col cols="12" v-if="type == 'add'">
-                <v-text-field label="Photo URL*" required></v-text-field>
+                <v-text-field v-model="url" label="Photo URL*" required></v-text-field>
               </v-col>
               <v-col cols="12" v-else>
                 <v-file-input
+                  v-model="file"
                   accept="image/png, image/jpg, image/jpeg"
                   show-size
                   label="Photo input*"
@@ -71,7 +72,10 @@
 export default {
   name: "AddDialog",
   data: () => ({
+    label: null,
     type: "add",
+    url: null,
+    file: null,
     dialog: false,
     uploading: false,
   }),
