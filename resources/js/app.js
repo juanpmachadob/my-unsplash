@@ -1,14 +1,9 @@
 window.Vue = require('vue').default;
 import vuetify from './vuetify';
 import App from './App.vue'
+import VueAxios from "vue-axios";
+import axios from "axios";
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
@@ -17,6 +12,8 @@ import App from './App.vue'
 Vue.component('app-bar', require('./components/AppBar.vue').default);
 Vue.component('image-container', require('./components/ImageContainer.vue').default);
 // Vue.component('app-bar', require('./components/AppBar.vue'));
+
+Vue.use(VueAxios, axios);
 
 const app = new Vue({
     el: '#app',

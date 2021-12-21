@@ -80,7 +80,9 @@ export default {
     uploading: false,
   }),
   methods: {
-    submitPhoto() {},
+    submitPhoto() {
+
+    },
   },
 };
 </script>
