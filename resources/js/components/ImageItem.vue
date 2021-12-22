@@ -7,7 +7,7 @@
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <delete-dialog />
+          <delete-dialog :index="index"/>
         </v-card-actions>
         <v-card-title class="mt-auto">{{photo.label}}</v-card-title>
       </div>
@@ -23,6 +23,7 @@ export default {
     DeleteDialog,
   },
   props: {
+    index: String,
     photo: Object,
   },
 };

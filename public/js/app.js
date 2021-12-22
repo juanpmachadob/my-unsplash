@@ -2314,8 +2314,13 @@ __webpack_require__.r(__webpack_exports__);
       uploading: false
     };
   },
+  props: {
+    index: String
+  },
   methods: {
-    deletePhoto: function deletePhoto() {}
+    deletePhoto: function deletePhoto() {
+      this.axios["delete"]("/api/photo/".concat(this.index), this.photo).then(function (res) {})["catch"](function (err) {});
+    }
   }
 });
 
@@ -2406,6 +2411,7 @@ __webpack_require__.r(__webpack_exports__);
     DeleteDialog: _DeleteDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
+    index: String,
     photo: Object
   }
 });
@@ -4249,7 +4255,7 @@ var render = function () {
           return _c(
             "v-col",
             { key: index, attrs: { cols: "6", md: "4" } },
-            [_c("ImageItem", { attrs: { photo: photo } })],
+            [_c("ImageItem", { attrs: { photo: photo, index: index } })],
             1
           )
         }),
@@ -4302,7 +4308,11 @@ var render = function () {
             [
               _c(
                 "v-card-actions",
-                [_c("v-spacer"), _vm._v(" "), _c("delete-dialog")],
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("delete-dialog", { attrs: { index: _vm.index } }),
+                ],
                 1
               ),
               _vm._v(" "),

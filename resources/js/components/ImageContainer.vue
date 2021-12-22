@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col v-for="(photo, index) in photos" :key="index" cols="6" md="4">
-        <ImageItem :photo="photo"/>
+        <ImageItem :photo="photo" :index="index"/>
       </v-col>
     </v-row>
   </v-container>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Database;
 
@@ -22,7 +21,6 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
-        // $photo = new Photo();
         $postData = [
             "label" => $request->label,
             "url" => $request->url,
@@ -30,15 +28,19 @@ class PhotoController extends Controller
         ];
         $postRef = $this->database->getReference($this->tablename)->push($postData);
         if ($postRef) {
-            return response('Photo added successfully.', 201);
+            return response('Photo added successfully.', 200);
         } else {
-            return response('Error.', 400);
+            return response('Photo not added.', 400);
         }
     }
 
-    public function destroy(Photo $photo)
+    public function destroy($id)
     {
-        $photo->delete();
-        return response()->json(["msg" => "Photo deleted successfully."]);
+        $delData = $this->database->getReference($this->tablename . "/" . $id)->remove();
+        if ($delData) {
+            return response('Photo deleted successfully.', 200);
+        } else {
+            return response('Photo not deleted.', 400);
+        }
     }
 }

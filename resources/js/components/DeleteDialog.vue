@@ -64,8 +64,16 @@ export default {
     dialog: false,
     uploading: false,
   }),
+  props: {
+    index: String,
+  },
   methods: {
-    deletePhoto() {},
+    deletePhoto() {
+      this.axios
+        .delete(`/api/photo/${this.index}`, this.photo)
+        .then((res) => {})
+        .catch((err) => {});
+    },
   },
 };
 </script>
