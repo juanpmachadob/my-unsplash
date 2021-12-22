@@ -1,6 +1,6 @@
 window.Vue = require('vue').default;
-import vuetify from './vuetify';
 import App from './App.vue'
+import vuetify from './vuetify'; 
 import VueAxios from "vue-axios";
 import axios from "axios";
 

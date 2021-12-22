@@ -18,7 +18,11 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="label" label="Label*" required></v-text-field>
+                <v-text-field
+                  v-model="photo.label"
+                  label="Label*"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-radio-group v-model="type" row>
@@ -35,11 +39,15 @@
                 </v-radio-group>
               </v-col>
               <v-col cols="12" v-if="type == 'add'">
-                <v-text-field v-model="url" label="Photo URL*" required></v-text-field>
+                <v-text-field
+                  v-model="photo.url"
+                  label="Photo URL*"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12" v-else>
                 <v-file-input
-                  v-model="file"
+                  v-model="photo.file"
                   accept="image/png, image/jpg, image/jpeg"
                   show-size
                   label="Photo input*"
@@ -51,7 +59,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="rounded-lg" color="secondary" :disabled="uploading" @click="dialog = false"
+          <v-btn
+            class="rounded-lg"
+            color="secondary"
+            :disabled="uploading"
+            @click="dialog = false"
             >Cancel</v-btn
           >
           <v-btn
@@ -72,16 +84,25 @@
 export default {
   name: "AddDialog",
   data: () => ({
-    label: null,
+    photo: {
+      label: null,
+      url: null,
+      file: null,
+    },
     type: "add",
-    url: null,
-    file: null,
     dialog: false,
     uploading: false,
   }),
   methods: {
     submitPhoto() {
-
+      this.axios
+        .post("/api/photos", this.photo)
+        .then((res) => {
+          console.log("axios then", this.photo);
+        })
+        .catch((err) => {
+          console.log("axios catch");
+        });
     },
   },
 };

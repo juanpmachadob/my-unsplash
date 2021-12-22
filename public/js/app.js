@@ -2162,20 +2162,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddDialog",
   data: function data() {
     return {
-      label: null,
+      photo: {
+        label: null,
+        url: null,
+        file: null
+      },
       type: "add",
-      url: null,
-      file: null,
       dialog: false,
       uploading: false
     };
   },
   methods: {
-    submitPhoto: function submitPhoto() {}
+    submitPhoto: function submitPhoto() {
+      var _this = this;
+
+      this.axios.post("/api/photos", this.photo).then(function (res) {
+        console.log("axios then", _this.photo);
+      })["catch"](function (err) {
+        console.log("axios catch");
+      });
+    }
   }
 });
 
@@ -2450,8 +2472,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
@@ -2469,9 +2491,9 @@ Vue.component('image-container', (__webpack_require__(/*! ./components/ImageCont
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default()));
 var app = new Vue({
   el: '#app',
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_0__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_1__["default"],
   render: function render(h) {
-    return h(_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   }
 });
 
@@ -3823,11 +3845,11 @@ var render = function () {
                               _c("v-text-field", {
                                 attrs: { label: "Label*", required: "" },
                                 model: {
-                                  value: _vm.label,
+                                  value: _vm.photo.label,
                                   callback: function ($$v) {
-                                    _vm.label = $$v
+                                    _vm.$set(_vm.photo, "label", $$v)
                                   },
-                                  expression: "label",
+                                  expression: "photo.label",
                                 },
                               }),
                             ],
@@ -3884,11 +3906,11 @@ var render = function () {
                                       required: "",
                                     },
                                     model: {
-                                      value: _vm.url,
+                                      value: _vm.photo.url,
                                       callback: function ($$v) {
-                                        _vm.url = $$v
+                                        _vm.$set(_vm.photo, "url", $$v)
                                       },
-                                      expression: "url",
+                                      expression: "photo.url",
                                     },
                                   }),
                                 ],
@@ -3907,11 +3929,11 @@ var render = function () {
                                       "prepend-icon": "mdi-image",
                                     },
                                     model: {
-                                      value: _vm.file,
+                                      value: _vm.photo.file,
                                       callback: function ($$v) {
-                                        _vm.file = $$v
+                                        _vm.$set(_vm.photo, "file", $$v)
                                       },
-                                      expression: "file",
+                                      expression: "photo.file",
                                     },
                                   }),
                                 ],

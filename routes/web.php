@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/{any}', function () {
-    return view('layouts.admin');
+    return view('welcome');
 })->where('any', '.*');
