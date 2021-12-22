@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="n in 9" :key="n" cols="6" md="4">
-        <ImageItem />
+      <v-col v-for="(photo, index) in photos" :key="index" cols="6" md="4">
+        <ImageItem :photo="photo"/>
       </v-col>
     </v-row>
   </v-container>
@@ -14,6 +14,19 @@ export default {
   name: "ImageContainer",
   components: {
     ImageItem,
+  },
+  data: () => ({
+    photos: [],
+  }),
+  mounted() {
+    this.getPhotos();
+  },
+  methods: {
+    getPhotos() {
+      this.axios.get("/api/photos").then((res) => {
+        this.photos = res.data;
+      });
+    },
   },
 };
 </script>

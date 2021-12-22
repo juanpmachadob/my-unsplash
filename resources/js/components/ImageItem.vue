@@ -9,7 +9,7 @@
           <v-spacer></v-spacer>
           <delete-dialog />
         </v-card-actions>
-        <v-card-title class="mt-auto">Top 10 Australian beaches</v-card-title>
+        <v-card-title class="mt-auto">{{photo.label}}</v-card-title>
       </div>
     </v-img>
   </v-card>
@@ -20,8 +20,11 @@ import DeleteDialog from "./DeleteDialog.vue";
 export default {
   name: "ImageItem",
   components: {
-    DeleteDialog
-  }
+    DeleteDialog,
+  },
+  props: {
+    photo: Object,
+  },
 };
 </script>
 

@@ -2348,6 +2348,23 @@ __webpack_require__.r(__webpack_exports__);
   name: "ImageContainer",
   components: {
     ImageItem: _ImageItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      photos: []
+    };
+  },
+  mounted: function mounted() {
+    this.getPhotos();
+  },
+  methods: {
+    getPhotos: function getPhotos() {
+      var _this = this;
+
+      this.axios.get("/api/photos").then(function (res) {
+        _this.photos = res.data;
+      });
+    }
   }
 });
 
@@ -2387,6 +2404,9 @@ __webpack_require__.r(__webpack_exports__);
   name: "ImageItem",
   components: {
     DeleteDialog: _DeleteDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    photo: Object
   }
 });
 
@@ -4225,11 +4245,11 @@ var render = function () {
     [
       _c(
         "v-row",
-        _vm._l(9, function (n) {
+        _vm._l(_vm.photos, function (photo, index) {
           return _c(
             "v-col",
-            { key: n, attrs: { cols: "6", md: "4" } },
-            [_c("ImageItem")],
+            { key: index, attrs: { cols: "6", md: "4" } },
+            [_c("ImageItem", { attrs: { photo: photo } })],
             1
           )
         }),
@@ -4287,7 +4307,7 @@ var render = function () {
               ),
               _vm._v(" "),
               _c("v-card-title", { staticClass: "mt-auto" }, [
-                _vm._v("Top 10 Australian beaches"),
+                _vm._v(_vm._s(_vm.photo.label)),
               ]),
             ],
             1
