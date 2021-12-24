@@ -2066,6 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/AppBar.vue */ "./resources/js/components/AppBar.vue");
+/* harmony import */ var _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ImageContainer.vue */ "./resources/js/components/ImageContainer.vue");
 //
 //
 //
@@ -2077,10 +2078,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   components: {
-    AppBar: _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    AppBar: _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ImageContainer: _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -2527,16 +2530,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ImageContainer.vue */ "./resources/js/components/ImageContainer.vue");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 
 
 
- // import AppBar from './components/AppBar.vue'
 
- // Vue.component('AppBar', AppBar);
-
-Vue.component('ImageContainer', _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default()));
 var app = new Vue({
   el: '#app',
