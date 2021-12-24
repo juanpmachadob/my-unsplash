@@ -24,7 +24,8 @@ class PhotoController extends Controller
         $postData = [
             "label" => $request->label,
             "url" => $request->url,
-            "file" => $request->file
+            "file" => $request->file,
+            "created_at" => "NOW"
         ];
         $postRef = $this->database->getReference($this->tablename)->push($postData);
         if ($postRef) {

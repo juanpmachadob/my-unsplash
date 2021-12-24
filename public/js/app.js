@@ -2065,6 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/AppBar.vue */ "./resources/js/components/AppBar.vue");
 //
 //
 //
@@ -2075,8 +2076,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "App"
+  name: "App",
+  components: {
+    AppBar: _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
 });
 
 /***/ }),
@@ -2092,7 +2097,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -2192,10 +2196,15 @@ __webpack_require__.r(__webpack_exports__);
     submitPhoto: function submitPhoto() {
       var _this = this;
 
+      this.uploading = true;
       this.axios.post("/api/photos", this.photo).then(function (res) {
-        console.log("axios then", _this.photo);
+        _this.$root.$emit("getPhotos");
+
+        _this.uploading = false;
+        _this.dialog = false;
       })["catch"](function (err) {
-        console.log("axios catch");
+        alert(err);
+        _this.uploading = false;
       });
     }
   }
@@ -2305,13 +2314,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeleteDialog",
   data: function data() {
     return {
       dialog: false,
-      uploading: false
+      deleting: false
     };
   },
   props: {
@@ -2319,7 +2327,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deletePhoto: function deletePhoto() {
-      this.axios["delete"]("/api/photo/".concat(this.index), this.photo).then(function (res) {})["catch"](function (err) {});
+      var _this = this;
+
+      this.deleting = true;
+      this.axios["delete"]("/api/photo/".concat(this.index), this.photo).then(function (res) {
+        _this.$root.$emit("getPhotos");
+
+        _this.deleting = false;
+        _this.dialog = false;
+      })["catch"](function (err) {
+        alert(err);
+        _this.deleting = false;
+      });
     }
   }
 });
@@ -2360,14 +2379,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.getPhotos();
+    this.$root.$on("getPhotos", function () {
+      _this.getPhotos();
+    });
   },
   methods: {
     getPhotos: function getPhotos() {
-      var _this = this;
+      var _this2 = this;
 
       this.axios.get("/api/photos").then(function (res) {
-        _this.photos = res.data;
+        _this2.photos = res.data;
       });
     }
   }
@@ -2503,17 +2527,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ImageContainer.vue */ "./resources/js/components/ImageContainer.vue");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 
 
 
- // const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+ // import AppBar from './components/AppBar.vue'
 
-Vue.component('app-bar', (__webpack_require__(/*! ./components/AppBar.vue */ "./resources/js/components/AppBar.vue")["default"]));
-Vue.component('image-container', (__webpack_require__(/*! ./components/ImageContainer.vue */ "./resources/js/components/ImageContainer.vue")["default"])); // Vue.component('app-bar', require('./components/AppBar.vue'));
+ // Vue.component('AppBar', AppBar);
 
+Vue.component('ImageContainer', _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default()));
 var app = new Vue({
   el: '#app',
@@ -3782,7 +3805,7 @@ var render = function () {
   return _c(
     "v-app",
     { attrs: { app: "" } },
-    [_c("app-bar"), _vm._v(" "), _c("v-content", [_c("image-container")], 1)],
+    [_c("app-bar"), _vm._v(" "), _c("v-main", [_c("image-container")], 1)],
     1
   )
 }
@@ -3998,11 +4021,7 @@ var render = function () {
                     "v-btn",
                     {
                       staticClass: "rounded-lg",
-                      attrs: {
-                        color: "success",
-                        disabled: _vm.uploading,
-                        loading: _vm.uploading,
-                      },
+                      attrs: { color: "success", loading: _vm.uploading },
                       on: {
                         click: function ($event) {
                           return _vm.submitPhoto()
@@ -4182,7 +4201,7 @@ var render = function () {
                     "v-btn",
                     {
                       staticClass: "rounded-lg",
-                      attrs: { color: "secondary", disabled: _vm.uploading },
+                      attrs: { color: "secondary", disabled: _vm.deleting },
                       on: {
                         click: function ($event) {
                           _vm.dialog = false
@@ -4199,8 +4218,7 @@ var render = function () {
                       attrs: {
                         color: "danger",
                         dark: "",
-                        disabled: _vm.uploading,
-                        loading: _vm.uploading,
+                        loading: _vm.deleting,
                       },
                       on: {
                         click: function ($event) {

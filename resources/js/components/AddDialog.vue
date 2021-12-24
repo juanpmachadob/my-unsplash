@@ -69,7 +69,6 @@
           <v-btn
             class="rounded-lg"
             color="success"
-            :disabled="uploading"
             :loading="uploading"
             @click="submitPhoto()"
           >
@@ -95,13 +94,17 @@ export default {
   }),
   methods: {
     submitPhoto() {
+      this.uploading = true;
       this.axios
         .post("/api/photos", this.photo)
         .then((res) => {
-          console.log("axios then", this.photo);
+          this.$root.$emit("getPhotos");
+          this.uploading = false;
+          this.dialog = false;
         })
         .catch((err) => {
-          console.log("axios catch");
+          alert(err);
+          this.uploading = false;
         });
     },
   },

@@ -38,7 +38,7 @@
           <v-btn
             class="rounded-lg"
             color="secondary"
-            :disabled="uploading"
+            :disabled="deleting"
             @click="dialog = false"
             >Cancel</v-btn
           >
@@ -46,8 +46,7 @@
             class="rounded-lg"
             color="danger"
             dark
-            :disabled="uploading"
-            :loading="uploading"
+            :loading="deleting"
             @click="deletePhoto()"
           >
             Delete
@@ -62,17 +61,25 @@ export default {
   name: "DeleteDialog",
   data: () => ({
     dialog: false,
-    uploading: false,
+    deleting: false,
   }),
   props: {
     index: String,
   },
   methods: {
     deletePhoto() {
+      this.deleting = true;
       this.axios
         .delete(`/api/photo/${this.index}`, this.photo)
-        .then((res) => {})
-        .catch((err) => {});
+        .then((res) => {
+          this.$root.$emit("getPhotos");
+          this.deleting = false;
+          this.dialog = false;
+        })
+        .catch((err) => {
+          alert(err);
+          this.deleting = false;
+        });
     },
   },
 };
