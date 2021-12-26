@@ -2,12 +2,12 @@
   <v-card class="rounded-lg">
     <v-img
       class="white--text hover-photo"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="photo.url"
     >
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <delete-dialog :index="index"/>
+          <delete-dialog :index="index" :photo="photo"/>
         </v-card-actions>
         <v-card-title class="mt-auto">{{photo.label}}</v-card-title>
       </div>

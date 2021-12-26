@@ -2181,6 +2181,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddDialog",
   data: function data() {
@@ -2188,7 +2189,7 @@ __webpack_require__.r(__webpack_exports__);
       photo: {
         label: null,
         url: null,
-        file: null
+        image: null
       },
       type: "add",
       dialog: false,
@@ -2196,11 +2197,28 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    get_photo: function get_photo(e) {
+      this.photo.image = e;
+    },
     submitPhoto: function submitPhoto() {
       var _this = this;
 
+      var photo;
+
+      if (this.type == "upload") {
+        this.photo.url = null;
+        photo = new FormData();
+
+        for (var key in this.photo) {
+          photo.append(key, this.photo[key]);
+        }
+      } else {
+        this.photo.image = null;
+        photo = this.photo;
+      }
+
       this.uploading = true;
-      this.axios.post("/api/photos", this.photo).then(function (res) {
+      this.axios.post("/api/photos", photo).then(function (res) {
         _this.$root.$emit("getPhotos");
 
         _this.uploading = false;
@@ -2326,7 +2344,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    index: String
+    index: String,
+    photo: Object
   },
   methods: {
     deletePhoto: function deletePhoto() {
@@ -2505,13 +2524,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SearchInput",
   data: function data() {
     return {
-      dialog: false
+      dialog: false,
+      searching: false
     };
+  },
+  methods: {
+    searchPhoto: function searchPhoto() {}
   }
 });
 
@@ -3969,19 +3991,14 @@ var render = function () {
                                 [
                                   _c("v-file-input", {
                                     attrs: {
-                                      accept:
-                                        "image/png, image/jpg, image/jpeg",
                                       "show-size": "",
                                       label: "Photo input*",
                                       "prepend-icon": "mdi-image",
+                                      accept:
+                                        "image/png, image/jpg, image/jpeg",
+                                      type: "file",
                                     },
-                                    model: {
-                                      value: _vm.photo.file,
-                                      callback: function ($$v) {
-                                        _vm.$set(_vm.photo, "file", $$v)
-                                      },
-                                      expression: "photo.file",
-                                    },
+                                    on: { change: _vm.get_photo },
                                   }),
                                 ],
                                 1
@@ -4159,7 +4176,7 @@ var render = function () {
                               _c("v-img", {
                                 attrs: {
                                   "max-width": "250px",
-                                  src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+                                  src: _vm.photo.url,
                                 },
                               }),
                             ],
@@ -4312,7 +4329,7 @@ var render = function () {
         "v-img",
         {
           staticClass: "white--text hover-photo",
-          attrs: { src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg" },
+          attrs: { src: _vm.photo.url },
         },
         [
           _c(
@@ -4327,7 +4344,9 @@ var render = function () {
                 [
                   _c("v-spacer"),
                   _vm._v(" "),
-                  _c("delete-dialog", { attrs: { index: _vm.index } }),
+                  _c("delete-dialog", {
+                    attrs: { index: _vm.index, photo: _vm.photo },
+                  }),
                 ],
                 1
               ),
@@ -4465,11 +4484,7 @@ var render = function () {
                     "v-btn",
                     {
                       staticClass: "rounded-lg",
-                      attrs: {
-                        color: "primary",
-                        disabled: _vm.searching,
-                        loading: _vm.searching,
-                      },
+                      attrs: { color: "primary", loading: _vm.searching },
                       on: {
                         click: function ($event) {
                           return _vm.searchPhoto()

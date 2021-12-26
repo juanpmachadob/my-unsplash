@@ -37,7 +37,6 @@
           <v-btn
             class="rounded-lg"
             color="primary"
-            :disabled="searching"
             :loading="searching"
             @click="searchPhoto()"
           >
@@ -53,6 +52,12 @@ export default {
   name: "SearchInput",
   data: () => ({
     dialog: false,
+    searching: false
   }),
+  methods: {
+    searchPhoto(){
+      
+    }
+  }
 };
 </script>

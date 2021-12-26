@@ -47,11 +47,12 @@
               </v-col>
               <v-col cols="12" v-else>
                 <v-file-input
-                  v-model="photo.file"
-                  accept="image/png, image/jpg, image/jpeg"
                   show-size
                   label="Photo input*"
                   prepend-icon="mdi-image"
+                  accept="image/png, image/jpg, image/jpeg"
+                  type="file"
+                  @change="get_photo"
                 ></v-file-input>
               </v-col>
             </v-row>
@@ -86,17 +87,31 @@ export default {
     photo: {
       label: null,
       url: null,
-      file: null,
+      image: null,
     },
     type: "add",
     dialog: false,
     uploading: false,
   }),
   methods: {
+    get_photo(e) {
+      this.photo.image = e;
+    },
     submitPhoto() {
+      let photo;
+      if (this.type == "upload") {
+        this.photo.url = null;
+        photo = new FormData();
+        for (let key in this.photo) {
+          photo.append(key, this.photo[key]);
+        }
+      } else {
+        this.photo.image = null;
+        photo = this.photo;
+      }
       this.uploading = true;
       this.axios
-        .post("/api/photos", this.photo)
+        .post("/api/photos", photo)
         .then((res) => {
           this.$root.$emit("getPhotos");
           this.uploading = false;

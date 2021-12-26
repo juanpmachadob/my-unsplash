@@ -20,7 +20,7 @@
               <v-col cols="12" align="center">
                 <v-img
                   max-width="250px"
-                  src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                  :src="photo.url"
                 ></v-img>
               </v-col>
               <v-col cols="12">
@@ -65,6 +65,7 @@ export default {
   }),
   props: {
     index: String,
+    photo: Object
   },
   methods: {
     deletePhoto() {
