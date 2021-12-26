@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Kreait\Firebase\Database;
 use Kreait\Firebase\Storage;
 
@@ -24,23 +25,32 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
-        $photo = [
-            "label" => $request->label,
-            "url" => $request->url,
-            "created_at" => date('Y-m-d H:i')
-        ];
-        $postRef = $this->database->getReference($this->tableName)->push($photo);
+        $request->validate([
+            "label" => "required|min:2|max:28",
+            "url" => "required_without:image|url",
+            "image" => "required_without:url|image|mimes:png,jpg,jpeg|max:512"
+        ]);
+
+        $postRef = $this->database->getReference($this->tableName)->push(
+            [
+                "label" => $request->label,
+                "url" => $request->url,
+                "created_at" => now() // date('Y-m-d H:i')
+            ]
+        );
+
         if ($postRef) {
             if ($request->hasFile("image")) {
-                $postKey = $postRef->getKey();
                 $image = $request->file("image");
-                $fileName = $postKey . "." . $image->getClientOriginalExtension();
+                $fileName = $postRef->getKey() . "." . $image->getClientOriginalExtension();
                 $localFolder = public_path("firebase-temp-uploads") . "/";
+
                 if ($image->move($localFolder, $fileName)) {
                     $uploadedfile = fopen($localFolder . $fileName, "r");
                     $this->storage->getBucket()->upload($uploadedfile, [
                         "name" => $this->storagePath . $fileName
                     ]);
+                    
                     unlink($localFolder . $fileName);
                 } else {
                     return response('Photo file not uploaded.', 400);

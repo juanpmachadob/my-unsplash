@@ -2182,18 +2182,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddDialog",
   data: function data() {
     return {
+      valid: false,
+      dialog: false,
+      uploading: false,
+      type: "add",
       photo: {
-        label: null,
+        label: "",
         url: null,
         image: null
       },
-      type: "add",
-      dialog: false,
-      uploading: false
+      rules: {
+        label: [function (v) {
+          return !!v || "Label is required.";
+        }, function (v) {
+          return v.length <= 28 || "Label must be less than 28 characters." + v;
+        }, function (v) {
+          return v.length >= 4 || "Label must be at least 4 characters length.";
+        }],
+        url: [function (v) {
+          return !!v || "Url is required.";
+        }, function (v) {
+          return (v || "").indexOf(" ") < 0 || "No spaces are allowed.";
+        }],
+        image: [function (v) {
+          return !!v || "Photo is required.";
+        }]
+      }
     };
   },
   methods: {
@@ -2210,23 +2234,36 @@ __webpack_require__.r(__webpack_exports__);
         photo = new FormData();
 
         for (var key in this.photo) {
-          photo.append(key, this.photo[key]);
+          if (this.photo[key]) {
+            photo.append(key, this.photo[key]);
+          }
         }
       } else {
         this.photo.image = null;
         photo = this.photo;
       }
 
+      console.log("photo", photo);
       this.uploading = true;
       this.axios.post("/api/photos", photo).then(function (res) {
         _this.$root.$emit("getPhotos");
 
         _this.uploading = false;
         _this.dialog = false;
+
+        _this.clear();
       })["catch"](function (err) {
         alert(err);
         _this.uploading = false;
       });
+    },
+    clear: function clear() {
+      this.photo = {
+        label: "",
+        url: null,
+        image: null
+      };
+      this.type = "add";
     }
   }
 });
@@ -3892,158 +3929,188 @@ var render = function () {
             "v-card",
             { staticClass: "rounded-lg" },
             [
-              _c("v-card-title", [
-                _c("span", { staticClass: "text-h5" }, [
-                  _vm._v("Add a new photo"),
-                ]),
-              ]),
-              _vm._v(" "),
               _c(
-                "v-card-text",
+                "v-form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.submitPhoto()
+                    },
+                  },
+                  model: {
+                    value: _vm.valid,
+                    callback: function ($$v) {
+                      _vm.valid = $$v
+                    },
+                    expression: "valid",
+                  },
+                },
                 [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "text-h5" }, [
+                      _vm._v("Add a new photo"),
+                    ]),
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "v-container",
+                    "v-card-text",
                     [
                       _c(
-                        "v-row",
+                        "v-container",
                         [
                           _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Label*", required: "" },
-                                model: {
-                                  value: _vm.photo.label,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.photo, "label", $$v)
-                                  },
-                                  expression: "photo.label",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
+                            "v-row",
                             [
                               _c(
-                                "v-radio-group",
-                                {
-                                  attrs: { row: "" },
-                                  model: {
-                                    value: _vm.type,
-                                    callback: function ($$v) {
-                                      _vm.type = $$v
-                                    },
-                                    expression: "type",
-                                  },
-                                },
-                                [
-                                  _c("v-radio", {
-                                    attrs: {
-                                      label: "Add photo URL",
-                                      color: "blue",
-                                      value: "add",
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-radio", {
-                                    attrs: {
-                                      label: "Upload photo",
-                                      color: "red",
-                                      value: "upload",
-                                    },
-                                  }),
-                                ],
-                                1
-                              ),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm.type == "add"
-                            ? _c(
                                 "v-col",
                                 { attrs: { cols: "12" } },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
-                                      label: "Photo URL*",
+                                      label: "Label*",
                                       required: "",
+                                      rules: _vm.rules.label,
+                                      counter: 28,
                                     },
                                     model: {
-                                      value: _vm.photo.url,
+                                      value: _vm.photo.label,
                                       callback: function ($$v) {
-                                        _vm.$set(_vm.photo, "url", $$v)
+                                        _vm.$set(_vm.photo, "label", $$v)
                                       },
-                                      expression: "photo.url",
+                                      expression: "photo.label",
                                     },
-                                  }),
-                                ],
-                                1
-                              )
-                            : _c(
-                                "v-col",
-                                { attrs: { cols: "12" } },
-                                [
-                                  _c("v-file-input", {
-                                    attrs: {
-                                      "show-size": "",
-                                      label: "Photo input*",
-                                      "prepend-icon": "mdi-image",
-                                      accept:
-                                        "image/png, image/jpg, image/jpeg",
-                                      type: "file",
-                                    },
-                                    on: { change: _vm.get_photo },
                                   }),
                                 ],
                                 1
                               ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c(
+                                    "v-radio-group",
+                                    {
+                                      attrs: { row: "" },
+                                      model: {
+                                        value: _vm.type,
+                                        callback: function ($$v) {
+                                          _vm.type = $$v
+                                        },
+                                        expression: "type",
+                                      },
+                                    },
+                                    [
+                                      _c("v-radio", {
+                                        attrs: {
+                                          label: "Add photo URL",
+                                          color: "blue",
+                                          value: "add",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-radio", {
+                                        attrs: {
+                                          label: "Upload photo",
+                                          color: "red",
+                                          value: "upload",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.type == "add"
+                                ? _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Photo URL*",
+                                          rules: _vm.rules.url,
+                                        },
+                                        model: {
+                                          value: _vm.photo.url,
+                                          callback: function ($$v) {
+                                            _vm.$set(_vm.photo, "url", $$v)
+                                          },
+                                          expression: "photo.url",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  )
+                                : _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c("v-file-input", {
+                                        attrs: {
+                                          "show-size": "",
+                                          label: "Photo input*",
+                                          "prepend-icon": "mdi-image",
+                                          accept:
+                                            "image/png, image/jpg, image/jpeg",
+                                          type: "file",
+                                          rules: _vm.rules.image,
+                                        },
+                                        on: { change: _vm.get_photo },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                            ],
+                            1
+                          ),
                         ],
                         1
                       ),
                     ],
                     1
                   ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      staticClass: "rounded-lg",
-                      attrs: { color: "secondary", disabled: _vm.uploading },
-                      on: {
-                        click: function ($event) {
-                          _vm.dialog = false
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: {
+                            color: "secondary",
+                            type: "button",
+                            disabled: _vm.uploading,
+                          },
+                          on: {
+                            click: function ($event) {
+                              _vm.dialog = false
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("Cancel")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "rounded-lg",
-                      attrs: { color: "success", loading: _vm.uploading },
-                      on: {
-                        click: function ($event) {
-                          return _vm.submitPhoto()
+                        [_vm._v("Cancel")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: {
+                            color: "success",
+                            type: "submit",
+                            loading: _vm.uploading,
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n          Submit\n        ")]
+                        [_vm._v("\n            Submit\n          ")]
+                      ),
+                    ],
+                    1
                   ),
                 ],
                 1
