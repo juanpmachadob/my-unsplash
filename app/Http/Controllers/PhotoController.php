@@ -25,7 +25,6 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
-        info($request);
         $request->validate([
             "label" => "required|min:2|max:28",
             "url" => "required_without:image|nullable|url",
