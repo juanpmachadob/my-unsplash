@@ -28,8 +28,8 @@ class PhotoController extends Controller
         info($request);
         $request->validate([
             "label" => "required|min:2|max:28",
-            "url" => "required_without:image|url",
-            "image" => "required_without:url|image|mimes:png,jpg,jpeg|max:512"
+            "url" => "required_without:image|nullable|url",
+            "image" => "required_without:url|nullable|image|mimes:png,jpg,jpeg|max:512"
         ]);
 
         $newPostKey = $this->database->getReference($this->tableName)->push()->getKey();
@@ -37,7 +37,7 @@ class PhotoController extends Controller
         $optionValue = null;
 
         if ($request->hasFile("image")) {
-            $optionKey = "file";
+            $optionKey = "image";
             $image = $request->file("image");
             $optionValue = $newPostKey . "." . $image->getClientOriginalExtension();
             $localFolder = public_path("firebase-temp-uploads") . "/";
