@@ -25,35 +25,46 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
+        info($request);
         $request->validate([
             "label" => "required|min:2|max:28",
             "url" => "required_without:image|url",
             "image" => "required_without:url|image|mimes:png,jpg,jpeg|max:512"
         ]);
 
-        $postRef = $this->database->getReference($this->tableName)->push(
-            [
-                "label" => $request->label,
-                "url" => $request->url,
-                "created_at" => now() // date('Y-m-d H:i')
-            ]
-        );
+        $newPostKey = $this->database->getReference($this->tableName)->push()->getKey();
+        $optionKey = null;
+        $optionValue = null;
 
         if ($request->hasFile("image")) {
+            $optionKey = "file";
             $image = $request->file("image");
-            $fileName = $postRef->getKey() . "." . $image->getClientOriginalExtension();
+            $optionValue = $newPostKey . "." . $image->getClientOriginalExtension();
             $localFolder = public_path("firebase-temp-uploads") . "/";
-
-            if ($image->move($localFolder, $fileName)) {
-                $uploadedfile = fopen($localFolder . $fileName, "r");
-                $this->storage->getBucket()->upload($uploadedfile, [
-                    "name" => $this->storagePath . $fileName
-                ]);
-                unlink($localFolder . $fileName);
+            if ($image->move($localFolder, $optionValue)) {
+                $uploadedfile = fopen($localFolder . $optionValue, "r");
+                $this->storage->getBucket()->upload(
+                    $uploadedfile,
+                    [
+                        "name" => $this->storagePath . $optionValue
+                    ]
+                );
+                unlink($localFolder . $optionValue);
             } else {
                 return response('Photo file not uploaded.', 400);
             }
+        } else {
+            $optionValue = $request->url;
+            $optionKey = "url";
         }
+
+        $postRef = $this->database->getReference()->update([
+            $this->tableName . "/" . $newPostKey => [
+                "label" => $request->label,
+                $optionKey => $optionValue,
+                "created_at" => now()
+            ]
+        ]);
 
         if ($postRef) {
             return response('Photo added successfully.', 200);
@@ -65,8 +76,8 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         $photo = $this->database->getReference($this->tableName . "/" . $id);
-        if (!array_key_exists("url", $photo->getValue())) {
-            $this->storage->getBucket()->object($this->storagePath . $photo->getKey() . ".png")->delete();
+        if (array_key_exists("file", $photo->getValue())) {
+            $this->storage->getBucket()->object($this->storagePath . $photo->getValue()["file"])->delete();
         }
         $delData = $this->database->getReference($this->tableName . "/" . $id)->remove();
         if ($delData) {
