@@ -2253,8 +2253,14 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.clear();
       })["catch"](function (err) {
-        alert(err);
         _this.uploading = false;
+
+        if (err.response.status === 422) {
+          console.log(err.response.data.errors);
+          alert("The fields are invalid.");
+        } else {
+          alert(err);
+        }
       });
     },
     clear: function clear() {

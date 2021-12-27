@@ -141,8 +141,13 @@ export default {
           this.clear();
         })
         .catch((err) => {
-          alert(err);
           this.uploading = false;
+          if (err.response.status === 422) {
+            console.log(err.response.data.errors)
+            alert("The fields are invalid.");
+          } else {
+            alert(err);
+          }
         });
     },
     clear() {
