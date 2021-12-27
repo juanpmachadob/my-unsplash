@@ -39,47 +39,35 @@ class PhotoController extends Controller
             ]
         );
 
-        if ($postRef) {
-            if ($request->hasFile("image")) {
-                $image = $request->file("image");
-                $fileName = $postRef->getKey() . "." . $image->getClientOriginalExtension();
-                $localFolder = public_path("firebase-temp-uploads") . "/";
-
-                if ($image->move($localFolder, $fileName)) {
-                    $uploadedfile = fopen($localFolder . $fileName, "r");
-                    $this->storage->getBucket()->upload($uploadedfile, [
-                        "name" => $this->storagePath . $fileName
-                    ]);
-                    
-                    unlink($localFolder . $fileName);
-                } else {
-                    return response('Photo file not uploaded.', 400);
-                }
-            }
-            return response('Photo added successfully.', 200);
-        } else {
-            return response('Photo not added.', 400);
-        }
-    }
-
-    public function uploadImage(Request $request, $key)
-    {
         if ($request->hasFile("image")) {
             $image = $request->file("image");
-            $fileName = $key . "." . $image->getClientOriginalExtension();
+            $fileName = $postRef->getKey() . "." . $image->getClientOriginalExtension();
             $localFolder = public_path("firebase-temp-uploads") . "/";
+
             if ($image->move($localFolder, $fileName)) {
                 $uploadedfile = fopen($localFolder . $fileName, "r");
                 $this->storage->getBucket()->upload($uploadedfile, [
                     "name" => $this->storagePath . $fileName
                 ]);
                 unlink($localFolder . $fileName);
+            } else {
+                return response('Photo file not uploaded.', 400);
             }
+        }
+
+        if ($postRef) {
+            return response('Photo added successfully.', 200);
+        } else {
+            return response('Photo not added.', 400);
         }
     }
 
     public function destroy($id)
     {
+        $photo = $this->database->getReference($this->tableName . "/" . $id);
+        if (!array_key_exists("url", $photo->getValue())) {
+            $this->storage->getBucket()->object($this->storagePath . $photo->getKey() . ".png")->delete();
+        }
         $delData = $this->database->getReference($this->tableName . "/" . $id)->remove();
         if ($delData) {
             return response('Photo deleted successfully.', 200);
