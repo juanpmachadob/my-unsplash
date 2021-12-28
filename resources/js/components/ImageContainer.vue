@@ -1,6 +1,14 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-if="photos.length === 0">
+      <v-col v-for="n in 18" :key="n" cols="6" md="4">
+      <v-skeleton-loader
+        class="ma-auto rounded-lg"
+        type="image"
+      ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+    <v-row v-else>
       <v-col v-for="(photo, index) in photos" :key="index" cols="6" md="4">
         <ImageItem :photo="photo" :index="index" />
       </v-col>

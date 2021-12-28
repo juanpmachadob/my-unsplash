@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Kreait\Firebase\Database;
@@ -19,7 +20,21 @@ class PhotoController extends Controller
 
     public function index()
     {
-        $photos = $this->database->getReference($this->tableName)->getValue();
+        $tempPhotos = $this->database->getReference($this->tableName)->getValue();
+        $photos = array_map(function($item) {
+            foreach($item as $key => $value){
+                if ($key == 'image') {
+                    $imageReference = $this->storage->getBucket()->object($this->storagePath . $value);
+                    if ($imageReference->exists()){
+                        $item["url"] = $imageReference->signedUrl(new DateTime("tomorrow"));
+                    } else {
+                        $item["url"] = null;
+                    }
+                }
+            }
+            return $item;
+        }, $tempPhotos);
+        info($photos);
         return $photos;
     }
 

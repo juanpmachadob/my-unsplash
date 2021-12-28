@@ -1,15 +1,20 @@
 <template>
   <v-card class="rounded-lg">
     <v-img
+    v-if="photo"
       class="white--text hover-photo"
-      :src="photo.url"
+      :src="
+        photo.url
+          ? photo.url
+          : getImage
+      "
     >
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <delete-dialog :index="index" :photo="photo"/>
+          <delete-dialog :index="index" :photo="photo" />
         </v-card-actions>
-        <v-card-title class="mt-auto">{{photo.label}}</v-card-title>
+        <v-card-title class="mt-auto">{{ photo.label }}</v-card-title>
       </div>
     </v-img>
   </v-card>
@@ -26,6 +31,11 @@ export default {
     index: String,
     photo: Object,
   },
+  computed: {
+    getImage(){
+      return "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+    }
+  }
 };
 </script>
 

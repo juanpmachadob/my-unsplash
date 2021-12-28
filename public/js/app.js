@@ -2432,6 +2432,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ImageContainer",
@@ -2493,6 +2501,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ImageItem",
@@ -2502,6 +2515,11 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     index: String,
     photo: Object
+  },
+  computed: {
+    getImage: function getImage() {
+      return "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+    }
   }
 });
 
@@ -4355,18 +4373,36 @@ var render = function () {
   return _c(
     "v-container",
     [
-      _c(
-        "v-row",
-        _vm._l(_vm.photos, function (photo, index) {
-          return _c(
-            "v-col",
-            { key: index, attrs: { cols: "6", md: "4" } },
-            [_c("ImageItem", { attrs: { photo: photo, index: index } })],
+      _vm.photos.length === 0
+        ? _c(
+            "v-row",
+            _vm._l(18, function (n) {
+              return _c(
+                "v-col",
+                { key: n, attrs: { cols: "6", md: "4" } },
+                [
+                  _c("v-skeleton-loader", {
+                    staticClass: "ma-auto rounded-lg",
+                    attrs: { type: "image" },
+                  }),
+                ],
+                1
+              )
+            }),
             1
           )
-        }),
-        1
-      ),
+        : _c(
+            "v-row",
+            _vm._l(_vm.photos, function (photo, index) {
+              return _c(
+                "v-col",
+                { key: index, attrs: { cols: "6", md: "4" } },
+                [_c("ImageItem", { attrs: { photo: photo, index: index } })],
+                1
+              )
+            }),
+            1
+          ),
     ],
     1
   )
@@ -4398,40 +4434,42 @@ var render = function () {
     "v-card",
     { staticClass: "rounded-lg" },
     [
-      _c(
-        "v-img",
-        {
-          staticClass: "white--text hover-photo",
-          attrs: { src: _vm.photo.url },
-        },
-        [
-          _c(
-            "div",
+      _vm.photo
+        ? _c(
+            "v-img",
             {
-              staticClass: "d-flex flex-column photo-content",
-              staticStyle: { height: "100%" },
+              staticClass: "white--text hover-photo",
+              attrs: { src: _vm.photo.url ? _vm.photo.url : _vm.getImage },
             },
             [
               _c(
-                "v-card-actions",
+                "div",
+                {
+                  staticClass: "d-flex flex-column photo-content",
+                  staticStyle: { height: "100%" },
+                },
                 [
-                  _c("v-spacer"),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c("delete-dialog", {
+                        attrs: { index: _vm.index, photo: _vm.photo },
+                      }),
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("delete-dialog", {
-                    attrs: { index: _vm.index, photo: _vm.photo },
-                  }),
+                  _c("v-card-title", { staticClass: "mt-auto" }, [
+                    _vm._v(_vm._s(_vm.photo.label)),
+                  ]),
                 ],
                 1
               ),
-              _vm._v(" "),
-              _c("v-card-title", { staticClass: "mt-auto" }, [
-                _vm._v(_vm._s(_vm.photo.label)),
-              ]),
-            ],
-            1
-          ),
-        ]
-      ),
+            ]
+          )
+        : _vm._e(),
     ],
     1
   )
