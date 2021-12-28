@@ -2378,6 +2378,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeleteDialog",
   data: function data() {
@@ -4261,6 +4262,7 @@ var render = function () {
                             { attrs: { cols: "12", align: "center" } },
                             [
                               _c("v-img", {
+                                staticClass: "rounded-lg",
                                 attrs: {
                                   "max-width": "250px",
                                   src: _vm.photo.url,

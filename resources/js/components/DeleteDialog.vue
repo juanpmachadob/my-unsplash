@@ -19,6 +19,7 @@
             <v-row>
               <v-col cols="12" align="center">
                 <v-img
+                class="rounded-lg"
                   max-width="250px"
                   :src="photo.url"
                 ></v-img>
