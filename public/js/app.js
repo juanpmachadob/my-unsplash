@@ -2498,14 +2498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ImageItem",
@@ -2518,7 +2510,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getImage: function getImage() {
-      return "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+      if (this.photo.url === null) {
+        this.photo.url = "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+      }
+
+      return this.photo.url;
     }
   }
 });

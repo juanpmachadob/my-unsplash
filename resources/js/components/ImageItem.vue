@@ -1,14 +1,6 @@
 <template>
   <v-card class="rounded-lg">
-    <v-img
-    v-if="photo"
-      class="white--text hover-photo"
-      :src="
-        photo.url
-          ? photo.url
-          : getImage
-      "
-    >
+    <v-img v-if="photo" class="white--text hover-photo" :src="photo.url ? photo.url : getImage">
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -32,10 +24,14 @@ export default {
     photo: Object,
   },
   computed: {
-    getImage(){
-      return "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
-    }
-  }
+    getImage() {
+      if (this.photo.url === null) {
+        this.photo.url =
+          "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+      }
+      return this.photo.url;
+    },
+  },
 };
 </script>
 
