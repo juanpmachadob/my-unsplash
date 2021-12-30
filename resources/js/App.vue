@@ -2,6 +2,7 @@
   <v-app app>
     <app-bar />
     <v-main>
+      <toast />
       <image-container />
       <!-- <router-view></router-view> -->
     </v-main>
@@ -10,12 +11,14 @@
 
 <script>
 import AppBar from "./components/AppBar.vue";
-import ImageContainer from './components/ImageContainer.vue'
+import Toast from "./components/Toast.vue";
+import ImageContainer from "./components/ImageContainer.vue";
 export default {
   name: "App",
   components: {
     AppBar,
-    ImageContainer
+    Toast,
+    ImageContainer,
   },
 };
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -34,7 +35,6 @@ class PhotoController extends Controller
             }
             return $item;
         }, $tempPhotos);
-        info($photos);
         return $photos;
     }
 
@@ -42,7 +42,7 @@ class PhotoController extends Controller
     {
         $request->validate([
             "label" => "required|min:2|max:28",
-            "url" => "required_without:image|nullable|url",
+            "url" => "required_without:image|nullable",
             "image" => "required_without:url|nullable|image|mimes:png,jpg,jpeg|max:512"
         ]);
 

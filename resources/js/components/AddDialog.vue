@@ -130,7 +130,7 @@ export default {
         this.photo.image = null;
         photo = this.photo;
       }
-      console.log("photo", photo);
+      
       this.uploading = true;
       this.axios
         .post("/api/photos", photo)
@@ -138,15 +138,20 @@ export default {
           this.$root.$emit("getPhotos");
           this.uploading = false;
           this.dialog = false;
+          this.$root.$emit("showToast", res.data, 2);
           this.clear();
         })
         .catch((err) => {
           this.uploading = false;
           if (err.response.status === 422) {
-            console.log(err.response.data.errors)
-            alert("The fields are invalid.");
+            this.$root.$emit("showToast", err.response.data.errors, 4);
           } else {
-            alert(err);
+            this.$root.$emit(
+              "showToast",
+              "An error has occurred. Try again.",
+              4
+            );
+            console.log("Error:", err);
           }
         });
     },
