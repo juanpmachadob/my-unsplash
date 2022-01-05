@@ -11,7 +11,7 @@
     </v-btn>
     <v-dialog v-model="dialog" max-width="500px" persistent>
       <v-card class="rounded-lg">
-        <v-form v-model="valid" @submit.prevent="submitPhoto()">
+        <v-form v-model="valid" @submit.prevent="submitPhoto()" ref="form">
           <v-card-title>
             <span class="text-h5">Add a new photo</span>
           </v-card-title>
@@ -156,6 +156,7 @@ export default {
         });
     },
     clear() {
+      this.$refs.form.reset();
       this.photo = {
         label: "",
         url: null,

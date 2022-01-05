@@ -2270,6 +2270,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clear: function clear() {
+      this.$refs.form.reset();
       this.photo = {
         label: "",
         url: null,
@@ -2422,7 +2423,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.deleting = false;
           _this.dialog = false;
 
-          _this.$root.$emit("showToast", res.data, 2);
+          _this.$root.$emit("showToast ", res.data, 2);
         })["catch"](function (err) {
           if (err.response.status === 400) {
             _this.deleting = false;
@@ -4147,6 +4148,7 @@ var render = function () {
               _c(
                 "v-form",
                 {
+                  ref: "form",
                   on: {
                     submit: function ($event) {
                       $event.preventDefault()
