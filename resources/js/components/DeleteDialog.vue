@@ -90,7 +90,7 @@ export default {
             this.$root.$emit("getPhotos");
             this.deleting = false;
             this.dialog = false;
-            this.$root.$emit("showToast ", res.data, 2);
+            this.$root.$emit("showToast", res.data, 2);
           })
           .catch((err) => {
             if (err.response.status === 400) {

@@ -1,13 +1,15 @@
 <template>
   <v-snackbar
+    app
     v-model="toast.enabled"
     :timeout="onTimeout"
     :color="toast.type"
     text
-    elevation="2"
+    elevation="4"
     absolute
     top
     right
+    class="fixed-pos"
   >
     {{ toast.message }}
     <template v-slot:action="{ attrs }">
@@ -36,6 +38,7 @@ export default {
   },
   methods: {
     showToast(message, type) {
+      console.log("Mensaje recibido")
       let types = {
         1: "info",
         2: "success",
@@ -64,3 +67,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.fixed-pos .v-snack__wrapper {
+  position: fixed;
+}
+</style>
