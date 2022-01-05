@@ -56,7 +56,8 @@
             ref="test"
             class="rounded-lg"
             color="danger"
-            dark
+            :dark="checkConfirmation"
+            :disabled="!checkConfirmation"
             :loading="deleting"
             @click="deletePhoto()"
           >
@@ -81,9 +82,7 @@ export default {
   },
   methods: {
     deletePhoto() {
-      let confirmationText =
-        "delete/" + this.photo.label.toLowerCase().replace(" ", "-");
-      if (this.confirmation == confirmationText) {
+      if (this.checkConfirmation) {
         this.deleting = true;
         this.axios
           .delete(`/api/photo/${this.index}`, this.photo)
@@ -119,6 +118,13 @@ export default {
           3
         );
       }
+    },
+  },
+  computed: {
+    checkConfirmation() {
+      let confirmationText =
+        "delete/" + this.photo.label.toLowerCase().replace(" ", "-");
+      return this.confirmation == confirmationText;
     },
   },
 };

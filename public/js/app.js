@@ -2396,6 +2396,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeleteDialog",
   data: function data() {
@@ -2413,9 +2414,7 @@ __webpack_require__.r(__webpack_exports__);
     deletePhoto: function deletePhoto() {
       var _this = this;
 
-      var confirmationText = "delete/" + this.photo.label.toLowerCase().replace(" ", "-");
-
-      if (this.confirmation == confirmationText) {
+      if (this.checkConfirmation) {
         this.deleting = true;
         this.axios["delete"]("/api/photo/".concat(this.index), this.photo).then(function (res) {
           _this.$root.$emit("getPhotos");
@@ -2441,6 +2440,12 @@ __webpack_require__.r(__webpack_exports__);
         this.$root.$emit("showToast", "The confirmation message doesnt' match.", 3);
       }
     }
+  },
+  computed: {
+    checkConfirmation: function checkConfirmation() {
+      var confirmationText = "delete/" + this.photo.label.toLowerCase().replace(" ", "-");
+      return this.confirmation == confirmationText;
+    }
   }
 });
 
@@ -2458,6 +2463,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ImageItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImageItem.vue */ "./resources/js/components/ImageItem.vue");
+//
 //
 //
 //
@@ -4546,7 +4552,8 @@ var render = function () {
                       staticClass: "rounded-lg",
                       attrs: {
                         color: "danger",
-                        dark: "",
+                        dark: _vm.checkConfirmation,
+                        disabled: !_vm.checkConfirmation,
                         loading: _vm.deleting,
                       },
                       on: {
@@ -4596,7 +4603,9 @@ var render = function () {
   return _c(
     "v-container",
     [
-      _vm.photos.length === 0
+      !_vm.photos
+        ? _c("v-row", [_vm._v(" No hay ninguna foto. ")])
+        : _vm.photos.length === 0
         ? _c(
             "v-row",
             _vm._l(18, function (n) {

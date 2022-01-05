@@ -22,20 +22,24 @@ class PhotoController extends Controller
     public function index()
     {
         $tempPhotos = $this->database->getReference($this->tableName)->getValue();
-        $photos = array_map(function($item) {
-            foreach($item as $key => $value){
-                if ($key == 'image') {
-                    $imageReference = $this->storage->getBucket()->object($this->storagePath . $value);
-                    if ($imageReference->exists()){
-                        $item["url"] = $imageReference->signedUrl(new DateTime("tomorrow"));
-                    } else {
-                        $item["url"] = null;
+        if ($tempPhotos) {
+            $photos = array_map(function ($item) {
+                foreach ($item as $key => $value) {
+                    if ($key == 'image') {
+                        $imageReference = $this->storage->getBucket()->object($this->storagePath . $value);
+                        if ($imageReference->exists()) {
+                            $item["url"] = $imageReference->signedUrl(new DateTime("tomorrow"));
+                        } else {
+                            $item["url"] = null;
+                        }
                     }
                 }
-            }
-            return $item;
-        }, $tempPhotos);
-        return $photos;
+                return $item;
+            }, $tempPhotos);
+            return $photos;
+        } else {
+            return null;
+        }
     }
 
     public function store(Request $request)

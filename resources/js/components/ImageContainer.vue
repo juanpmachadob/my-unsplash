@@ -1,11 +1,12 @@
 <template>
   <v-container>
-    <v-row v-if="photos.length === 0">
+    <v-row v-if="!photos"> No hay ninguna foto. </v-row>
+    <v-row v-else-if="photos.length === 0">
       <v-col v-for="n in 18" :key="n" cols="6" md="4">
-      <v-skeleton-loader
-        class="ma-auto rounded-lg"
-        type="image"
-      ></v-skeleton-loader>
+        <v-skeleton-loader
+          class="ma-auto rounded-lg"
+          type="image"
+        ></v-skeleton-loader>
       </v-col>
     </v-row>
     <v-row v-else>
