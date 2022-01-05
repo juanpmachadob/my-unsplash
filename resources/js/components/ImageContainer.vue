@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row v-if="!photos"> No hay ninguna foto. </v-row>
+    <v-row v-if="!photos"> <v-chip class="mt-3">There is no photo added. Please add one.</v-chip> </v-row>
     <v-row v-else-if="photos.length === 0">
       <v-col v-for="n in 18" :key="n" cols="6" md="4">
         <v-skeleton-loader

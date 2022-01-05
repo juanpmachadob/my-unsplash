@@ -4604,7 +4604,15 @@ var render = function () {
     "v-container",
     [
       !_vm.photos
-        ? _c("v-row", [_vm._v(" No hay ninguna foto. ")])
+        ? _c(
+            "v-row",
+            [
+              _c("v-chip", { staticClass: "mt-3" }, [
+                _vm._v("There is no photo added. Please add one."),
+              ]),
+            ],
+            1
+          )
         : _vm.photos.length === 0
         ? _c(
             "v-row",
