@@ -34,9 +34,6 @@ export default {
     this.$root.$on("getPhotos", () => {
       this.getPhotos();
     });
-    this.$root.$on("checkImage", (imageSrc) => {
-      this.checkImage(imageSrc);
-    });
   },
   methods: {
     getPhotos() {

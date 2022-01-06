@@ -2519,9 +2519,6 @@ __webpack_require__.r(__webpack_exports__);
     this.$root.$on("getPhotos", function () {
       _this.getPhotos();
     });
-    this.$root.$on("checkImage", function (imageSrc) {
-      _this.checkImage(imageSrc);
-    });
   },
   methods: {
     getPhotos: function getPhotos() {
