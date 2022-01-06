@@ -2624,8 +2624,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getImage: function getImage() {
+      var _this = this;
+
+      var placeholderUrl = "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+
       if (this.photo.url === null) {
-        this.photo.url = "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+        this.photo.url = placeholderUrl;
+      } else {
+        var img = new Image();
+        img.src = this.photo.url;
+
+        img.onerror = function () {
+          _this.photo.url = placeholderUrl;
+        };
       }
 
       return this.photo.url;
@@ -5586,7 +5597,7 @@ var render = function () {
             "v-img",
             {
               staticClass: "white--text hover-photo",
-              attrs: { src: _vm.photo.url ? _vm.photo.url : _vm.getImage },
+              attrs: { src: _vm.getImage },
             },
             [
               _c(
