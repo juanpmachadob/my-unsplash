@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     showToast(message, type) {
-      console.log("Mensaje recibido")
+      console.log("Mensaje recibido");
       let types = {
         1: "info",
         2: "success",
@@ -69,8 +69,8 @@ export default {
 </script>
 
 <style>
-.fixed-pos{
-  z-index: 300;
+.fixed-pos {
+  z-index: 300 !important;
 }
 .fixed-pos .v-snack__wrapper {
   position: fixed;
