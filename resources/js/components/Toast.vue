@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style>
+.fixed-pos{
+  z-index: 300;
+}
 .fixed-pos .v-snack__wrapper {
   position: fixed;
 }
