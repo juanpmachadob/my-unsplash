@@ -135,29 +135,28 @@ export default {
         }
       }
       this.uploading = true;
-      console.log("llego")
-      // this.axios
-      //   .post("/api/photos", photo)
-      //   .then((res) => {
-      //     this.$root.$emit("getPhotos");
-      //     this.uploading = false;
-      //     this.dialog = false;
-      //     this.$root.$emit("showToast", res.data, 2);
-      //     this.clear();
-      //   })
-      //   .catch((err) => {
-      //     this.uploading = false;
-      //     if (err.response.status === 422) {
-      //       this.$root.$emit("showToast", err.response.data.errors, 4);
-      //     } else {
-      //       this.$root.$emit(
-      //         "showToast",
-      //         "An error has occurred. Try again.",
-      //         4
-      //       );
-      //       console.log("Error:", err);
-      //     }
-      //   });
+      this.axios
+        .post("/api/photos", photo)
+        .then((res) => {
+          this.$root.$emit("getPhotos");
+          this.uploading = false;
+          this.dialog = false;
+          this.$root.$emit("showToast", res.data, 2);
+          this.clear();
+        })
+        .catch((err) => {
+          this.uploading = false;
+          if (err.response.status === 422) {
+            this.$root.$emit("showToast", err.response.data.errors, 4);
+          } else {
+            this.$root.$emit(
+              "showToast",
+              "An error has occurred. Try again.",
+              4
+            );
+            console.log("Error:", err);
+          }
+        });
     },
     checkImage(imageSrc) {
       var img = new Image();

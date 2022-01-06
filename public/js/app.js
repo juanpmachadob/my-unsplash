@@ -2229,6 +2229,8 @@ __webpack_require__.r(__webpack_exports__);
       this.photo.image = e;
     },
     submitPhoto: function submitPhoto() {
+      var _this = this;
+
       var photo;
 
       if (this.type == "upload") {
@@ -2251,28 +2253,26 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.uploading = true;
-      console.log("llego"); // this.axios
-      //   .post("/api/photos", photo)
-      //   .then((res) => {
-      //     this.$root.$emit("getPhotos");
-      //     this.uploading = false;
-      //     this.dialog = false;
-      //     this.$root.$emit("showToast", res.data, 2);
-      //     this.clear();
-      //   })
-      //   .catch((err) => {
-      //     this.uploading = false;
-      //     if (err.response.status === 422) {
-      //       this.$root.$emit("showToast", err.response.data.errors, 4);
-      //     } else {
-      //       this.$root.$emit(
-      //         "showToast",
-      //         "An error has occurred. Try again.",
-      //         4
-      //       );
-      //       console.log("Error:", err);
-      //     }
-      //   });
+      this.axios.post("/api/photos", photo).then(function (res) {
+        _this.$root.$emit("getPhotos");
+
+        _this.uploading = false;
+        _this.dialog = false;
+
+        _this.$root.$emit("showToast", res.data, 2);
+
+        _this.clear();
+      })["catch"](function (err) {
+        _this.uploading = false;
+
+        if (err.response.status === 422) {
+          _this.$root.$emit("showToast", err.response.data.errors, 4);
+        } else {
+          _this.$root.$emit("showToast", "An error has occurred. Try again.", 4);
+
+          console.log("Error:", err);
+        }
+      });
     },
     checkImage: function checkImage(imageSrc) {
       var img = new Image();
