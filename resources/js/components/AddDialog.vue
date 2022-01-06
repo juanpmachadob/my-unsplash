@@ -129,31 +129,45 @@ export default {
       } else {
         this.photo.image = null;
         photo = this.photo;
+        if (!this.checkImage(this.photo.url)) {
+          this.$root.$emit("showToast", "The image could not be loaded.", 4);
+          return;
+        }
       }
-      
       this.uploading = true;
-      this.axios
-        .post("/api/photos", photo)
-        .then((res) => {
-          this.$root.$emit("getPhotos");
-          this.uploading = false;
-          this.dialog = false;
-          this.$root.$emit("showToast", res.data, 2);
-          this.clear();
-        })
-        .catch((err) => {
-          this.uploading = false;
-          if (err.response.status === 422) {
-            this.$root.$emit("showToast", err.response.data.errors, 4);
-          } else {
-            this.$root.$emit(
-              "showToast",
-              "An error has occurred. Try again.",
-              4
-            );
-            console.log("Error:", err);
-          }
-        });
+      console.log("llego")
+      // this.axios
+      //   .post("/api/photos", photo)
+      //   .then((res) => {
+      //     this.$root.$emit("getPhotos");
+      //     this.uploading = false;
+      //     this.dialog = false;
+      //     this.$root.$emit("showToast", res.data, 2);
+      //     this.clear();
+      //   })
+      //   .catch((err) => {
+      //     this.uploading = false;
+      //     if (err.response.status === 422) {
+      //       this.$root.$emit("showToast", err.response.data.errors, 4);
+      //     } else {
+      //       this.$root.$emit(
+      //         "showToast",
+      //         "An error has occurred. Try again.",
+      //         4
+      //       );
+      //       console.log("Error:", err);
+      //     }
+      //   });
+    },
+    checkImage(imageSrc) {
+      var img = new Image();
+      img.src = imageSrc;
+      img.onload = function () {
+        return true;
+      };
+      img.onerror = function () {
+        return false;
+      };
     },
     clear() {
       this.$refs.form.reset();
