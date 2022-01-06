@@ -116,8 +116,9 @@ export default {
     get_photo(e) {
       this.photo.image = e;
     },
-    submitPhoto() {
+    async submitPhoto() {
       let photo;
+      this.uploading = true;
       if (this.type == "upload") {
         this.photo.url = null;
         photo = new FormData();
@@ -128,45 +129,47 @@ export default {
         }
       } else {
         this.photo.image = null;
-        photo = this.photo;
-        if (!this.checkImage(this.photo.url)) {
-          this.$root.$emit("showToast", "The image could not be loaded.", 4);
-          return;
-        }
+        await this.validateImage(this.photo.url)
+          .then((status) => {
+            photo = this.photo;
+          })
+          .catch((err) => {
+            this.$root.$emit("showToast", "The image could not be loaded.", 4);
+            this.uploading = false;
+          });
       }
-      this.uploading = true;
-      this.axios
-        .post("/api/photos", photo)
-        .then((res) => {
-          this.$root.$emit("getPhotos");
-          this.uploading = false;
-          this.dialog = false;
-          this.$root.$emit("showToast", res.data, 2);
-          this.clear();
-        })
-        .catch((err) => {
-          this.uploading = false;
-          if (err.response.status === 422) {
-            this.$root.$emit("showToast", err.response.data.errors, 4);
-          } else {
-            this.$root.$emit(
-              "showToast",
-              "An error has occurred. Try again.",
-              4
-            );
-            console.log("Error:", err);
-          }
-        });
+      if (this.uploading) {
+        this.axios
+          .post("/api/photos", photo)
+          .then((res) => {
+            this.$root.$emit("getPhotos");
+            this.uploading = false;
+            this.dialog = false;
+            this.$root.$emit("showToast", res.data, 2);
+            this.clear();
+          })
+          .catch((err) => {
+            this.uploading = false;
+            if (err.response.status === 422) {
+              this.$root.$emit("showToast", err.response.data.errors, 4);
+            } else {
+              this.$root.$emit(
+                "showToast",
+                "An error has occurred. Try again.",
+                4
+              );
+              console.log("Error:", err);
+            }
+          });
+      }
     },
-    checkImage(imageSrc) {
-      var img = new Image();
-      img.src = imageSrc;
-      img.onload = function () {
-        return true;
-      };
-      img.onerror = function () {
-        return false;
-      };
+    validateImage(path) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve({ path, status: "ok" });
+        img.onerror = () => reject({ path, status: "error" });
+        img.src = path;
+      });
     },
     clear() {
       this.$refs.form.reset();

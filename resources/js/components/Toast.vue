@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     showToast(message, type) {
-      console.log("Mensaje recibido");
       let types = {
         1: "info",
         2: "success",
