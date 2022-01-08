@@ -2301,7 +2301,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.uploading = false;
 
                     if (err.response.status === 422) {
-                      _this.$root.$emit("showToast", err.response.data.errors, 4);
+                      _this.$root.$emit("showToast", Object.values(err.response.data.errors)[0][0], 4);
                     } else {
                       _this.$root.$emit("showToast", "An error has occurred. Try again.", 4);
 
@@ -2711,11 +2711,22 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dialog: false,
-      searching: false
+      searching: false,
+      key: null
     };
   },
   methods: {
-    searchPhoto: function searchPhoto() {}
+    searchPhoto: function searchPhoto() {
+      this.axios.get("/api/photo", {
+        params: {
+          label: this.key
+        }
+      }).then(function (res) {
+        console.log("res", res.data);
+      })["catch"](function (err) {
+        console.log("error: ", err.response);
+      });
+    }
   }
 });
 
@@ -5716,6 +5727,13 @@ var render = function () {
                             [
                               _c("v-text-field", {
                                 attrs: { label: "Photo name*", required: "" },
+                                model: {
+                                  value: _vm.key,
+                                  callback: function ($$v) {
+                                    _vm.key = $$v
+                                  },
+                                  expression: "key",
+                                },
                               }),
                             ],
                             1

@@ -36,7 +36,7 @@ class PhotoController extends Controller
                 }
                 return $item;
             }, $tempPhotos);
-            return $photos;
+            return array_reverse($photos);
         } else {
             return null;
         }
@@ -78,7 +78,7 @@ class PhotoController extends Controller
 
         $postRef = $this->database->getReference()->update([
             $this->tableName . "/" . $newPostKey => [
-                "label" => $request->label,
+                "label" => strtoupper($request->label),
                 $optionKey => $optionValue,
                 "created_at" => now()
             ]
@@ -89,6 +89,24 @@ class PhotoController extends Controller
         } else {
             return response('Photo not added.', 400);
         }
+    }
+
+    public function search(Request $request)
+    {
+        //There is no exact function to query using '%like%'
+        $key = strtoupper($request->label);
+        $tempPhotos = $this->database->getReference('photos')
+            ->orderByChild('label')
+            ->startAt($key)
+            ->limitToFirst(100)
+            ->getValue();
+        $photos = array();
+        foreach ($tempPhotos as $item) {
+            if (str_contains($item['label'], $key)) {
+                array_push($photos, $item);
+            }
+        }
+        return $photos;
     }
 
     public function destroy($id)

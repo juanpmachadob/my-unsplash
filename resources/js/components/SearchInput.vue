@@ -20,7 +20,7 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Photo name*" required></v-text-field>
+                <v-text-field v-model="key" label="Photo name*" required></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -52,11 +52,22 @@ export default {
   name: "SearchInput",
   data: () => ({
     dialog: false,
-    searching: false
+    searching: false,
+    key: null
   }),
   methods: {
     searchPhoto(){
-      
+      this.axios.get("/api/photo", {
+        params: {
+          label: this.key
+        },
+      })
+      .then((res) => {
+        console.log("res", res.data);
+      })
+      .catch((err) => {
+        console.log("error: ", err.response)
+      })
     }
   }
 };

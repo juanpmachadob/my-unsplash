@@ -151,7 +151,7 @@ export default {
           .catch((err) => {
             this.uploading = false;
             if (err.response.status === 422) {
-              this.$root.$emit("showToast", err.response.data.errors, 4);
+              this.$root.$emit("showToast", Object.values(err.response.data.errors)[0][0], 4);
             } else {
               this.$root.$emit(
                 "showToast",
