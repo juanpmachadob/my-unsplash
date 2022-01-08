@@ -94,16 +94,15 @@ class PhotoController extends Controller
     public function search(Request $request)
     {
         //There is no exact function to query using '%like%'
-        $key = strtoupper($request->label);
-        $tempPhotos = $this->database->getReference('photos')
+        $labelToFind = strtoupper($request->label);
+        $photos = $this->database->getReference('photos')
             ->orderByChild('label')
-            ->startAt($key)
+            ->startAt($labelToFind)
             ->limitToFirst(100)
             ->getValue();
-        $photos = array();
-        foreach ($tempPhotos as $item) {
-            if (str_contains($item['label'], $key)) {
-                array_push($photos, $item);
+        foreach ($photos as $key=>$item) {
+            if (!str_contains($item['label'], $labelToFind)) {
+                unset($photos[$key]);
             }
         }
         return $photos;
