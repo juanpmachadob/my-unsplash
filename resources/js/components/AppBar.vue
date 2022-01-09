@@ -1,13 +1,21 @@
 <template>
-  <v-app-bar app light color="white" elevate-on-scroll>
-    <v-toolbar-title>My unsplash</v-toolbar-title>
-    <search-input></search-input>
-    <v-chip color="primary" v-if="labelToSearch" close @click:close="resetSearch()"
-      >Searching:
-      <strong>{{ labelToSearch }}</strong>
-    </v-chip>
-    <v-spacer></v-spacer>
-    <add-dialog />
+  <v-app-bar app color="white" elevate-on-scroll>
+    <v-container>
+      <v-app-bar color="white" dense elevation="0" class="pa-0">
+        <v-toolbar-title>My unsplash</v-toolbar-title>
+        <search-input></search-input>
+        <v-chip
+          color="primary"
+          v-if="labelToSearch"
+          close
+          @click:close="resetSearch()"
+          >Searching:
+          <strong>{{ labelToSearch }}</strong>
+        </v-chip>
+        <v-spacer></v-spacer>
+        <add-dialog />
+      </v-app-bar>
+    </v-container>
   </v-app-bar>
 </template>
 <script>
@@ -20,12 +28,18 @@ export default {
     SearchInput,
   },
   props: {
-    labelToSearch: String
+    labelToSearch: String,
   },
   methods: {
-    resetSearch(){
+    resetSearch() {
       this.$emit("resetSearch");
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style>
+.v-toolbar__content {
+  padding: 0 !important;
+}
+</style>

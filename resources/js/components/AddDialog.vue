@@ -3,7 +3,7 @@
     <v-btn
       :disabled="dialog"
       color="success"
-      class="ma-2 rounded-lg"
+      class="rounded-lg"
       @click="dialog = true"
     >
       Add a photo

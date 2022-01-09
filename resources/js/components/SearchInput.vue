@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- <v-btn color="success" class="rounded-lg">Add a </v-btn> -->
     <v-btn
       :disabled="dialog"
       color="primary"
       outlined
-      class="mx-8 rounded-lg"
+      class="mx-6 rounded-lg"
       @click="dialog = true"
     >
       <v-icon left light> mdi-magnify </v-icon>
