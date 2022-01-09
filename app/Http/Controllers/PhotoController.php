@@ -100,7 +100,7 @@ class PhotoController extends Controller
             ->startAt($labelToFind)
             ->limitToFirst(100)
             ->getValue();
-        foreach ($photos as $key=>$item) {
+        foreach ($photos as $key => $item) {
             if (!str_contains($item['label'], $labelToFind)) {
                 unset($photos[$key]);
             }

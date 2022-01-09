@@ -1,9 +1,12 @@
 <template>
   <v-app app>
-    <app-bar />
+    <app-bar
+      :labelToSearch="labelToSearch"
+      @resetSearch="resetSearch()"
+    />
     <v-main>
       <toast />
-      <image-container />
+      <image-container ref="ImageContainer" v-on:getSearchPhotos="getSearchPhotos" />
       <!-- <router-view></router-view> -->
     </v-main>
   </v-app>
@@ -19,6 +22,18 @@ export default {
     AppBar,
     Toast,
     ImageContainer,
+  },
+  data: () => ({
+    labelToSearch: null,
+  }),
+  methods: {
+    getSearchPhotos(labelToSearch) {
+      this.labelToSearch = labelToSearch;
+    },
+    resetSearch(){
+      this.labelToSearch = null;
+      this.$refs.ImageContainer.resetSearch();
+    }
   },
 };
 </script>

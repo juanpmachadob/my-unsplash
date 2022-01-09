@@ -20,7 +20,11 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="key" label="Photo name*" required></v-text-field>
+                <v-text-field
+                  v-model="labelToSearch"
+                  label="Photo label*"
+                  required
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -38,7 +42,7 @@
             class="rounded-lg"
             color="primary"
             :loading="searching"
-            @click="searchPhoto()"
+            @click="searchPhotos()"
           >
             Search
           </v-btn>
@@ -53,22 +57,30 @@ export default {
   data: () => ({
     dialog: false,
     searching: false,
-    key: null
+    labelToSearch: null,
   }),
+  mounted() {
+    this.$root.$on("searchPhotos", (labelToSearch) => {
+      this.labelToSearch = labelToSearch;
+      this.searchPhotos();
+    });
+  },
   methods: {
-    searchPhoto(){
-      this.axios.get("/api/photo", {
-        params: {
-          label: this.key
-        },
-      })
-      .then((res) => {
-        console.log("res", res.data);
-      })
-      .catch((err) => {
-        console.log("error: ", err.response)
-      })
-    }
-  }
+    searchPhotos() {
+      this.axios
+        .get("/api/photo", {
+          params: {
+            label: this.labelToSearch,
+          },
+        })
+        .then((res) => {
+          this.$root.$emit("getSearchPhotos", this.labelToSearch, res.data);
+        })
+        .catch((err) => {
+          this.$root.$emit("showToast", "An error has occurred. Try again.", 4);
+          console.log("Error", err);
+        });
+    },
+  },
 };
 </script>

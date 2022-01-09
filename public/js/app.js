@@ -2090,6 +2090,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2099,6 +2102,20 @@ __webpack_require__.r(__webpack_exports__);
     AppBar: _components_AppBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Toast: _components_Toast_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ImageContainer: _components_ImageContainer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      labelToSearch: null
+    };
+  },
+  methods: {
+    getSearchPhotos: function getSearchPhotos(labelToSearch) {
+      this.labelToSearch = labelToSearch;
+    },
+    resetSearch: function resetSearch() {
+      this.labelToSearch = null;
+      this.$refs.ImageContainer.resetSearch();
+    }
   }
 });
 
@@ -2374,6 +2391,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2381,6 +2402,14 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AddDialog: _AddDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     SearchInput: _SearchInput_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    labelToSearch: String
+  },
+  methods: {
+    resetSearch: function resetSearch() {
+      this.$emit("resetSearch");
+    }
   }
 });
 
@@ -2554,6 +2583,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ImageContainer",
@@ -2562,7 +2596,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      photos: []
+      photos: [],
+      searching: null
     };
   },
   mounted: function mounted() {
@@ -2572,14 +2607,30 @@ __webpack_require__.r(__webpack_exports__);
     this.$root.$on("getPhotos", function () {
       _this.getPhotos();
     });
+    this.$root.$on("getSearchPhotos", function (labelToSearch, data) {
+      _this.getSearchPhotos(labelToSearch, data);
+    });
   },
   methods: {
     getPhotos: function getPhotos() {
       var _this2 = this;
 
-      this.axios.get("/api/photos").then(function (res) {
-        _this2.photos = res.data;
-      });
+      if (!this.searching) {
+        this.axios.get("/api/photos").then(function (res) {
+          _this2.photos = res.data;
+        });
+      } else {
+        this.$root.$emit("searchPhotos", this.searching);
+      }
+    },
+    getSearchPhotos: function getSearchPhotos(labelToSearch, data) {
+      this.searching = labelToSearch;
+      this.photos = data;
+      this.$emit("getSearchPhotos", labelToSearch);
+    },
+    resetSearch: function resetSearch() {
+      this.searching = null;
+      this.getPhotos();
     }
   }
 });
@@ -2706,25 +2757,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SearchInput",
   data: function data() {
     return {
       dialog: false,
       searching: false,
-      key: null
+      labelToSearch: null
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on("searchPhotos", function (labelToSearch) {
+      _this.labelToSearch = labelToSearch;
+
+      _this.searchPhotos();
+    });
+  },
   methods: {
-    searchPhoto: function searchPhoto() {
+    searchPhotos: function searchPhotos() {
+      var _this2 = this;
+
       this.axios.get("/api/photo", {
         params: {
-          label: this.key
+          label: this.labelToSearch
         }
       }).then(function (res) {
-        console.log("res", res.data);
+        _this2.$root.$emit("getSearchPhotos", _this2.labelToSearch, res.data);
       })["catch"](function (err) {
-        console.log("error: ", err.response);
+        _this2.$root.$emit("showToast", "An error has occurred. Try again.", 4);
+
+        console.log("Error", err);
       });
     }
   }
@@ -5010,9 +5078,27 @@ var render = function () {
     "v-app",
     { attrs: { app: "" } },
     [
-      _c("app-bar"),
+      _c("app-bar", {
+        attrs: { labelToSearch: _vm.labelToSearch },
+        on: {
+          resetSearch: function ($event) {
+            return _vm.resetSearch()
+          },
+        },
+      }),
       _vm._v(" "),
-      _c("v-main", [_c("toast"), _vm._v(" "), _c("image-container")], 1),
+      _c(
+        "v-main",
+        [
+          _c("toast"),
+          _vm._v(" "),
+          _c("image-container", {
+            ref: "ImageContainer",
+            on: { getSearchPhotos: _vm.getSearchPhotos },
+          }),
+        ],
+        1
+      ),
     ],
     1
   )
@@ -5308,6 +5394,24 @@ var render = function () {
       _vm._v(" "),
       _c("search-input"),
       _vm._v(" "),
+      _vm.labelToSearch
+        ? _c(
+            "v-chip",
+            {
+              attrs: { color: "primary", close: "" },
+              on: {
+                "click:close": function ($event) {
+                  return _vm.resetSearch()
+                },
+              },
+            },
+            [
+              _vm._v("Searching:\n    "),
+              _c("strong", [_vm._v(_vm._s(_vm.labelToSearch))]),
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
       _c("add-dialog"),
@@ -5542,7 +5646,7 @@ var render = function () {
             ],
             1
           )
-        : _vm.photos.length === 0
+        : _vm.photos.length === 0 && !_vm.searching
         ? _c(
             "v-row",
             _vm._l(18, function (n) {
@@ -5558,6 +5662,16 @@ var render = function () {
                 1
               )
             }),
+            1
+          )
+        : _vm.photos.length === 0 && _vm.searching
+        ? _c(
+            "v-row",
+            [
+              _c("v-chip", { staticClass: "mt-3" }, [
+                _vm._v("No photo could be found with the specified label."),
+              ]),
+            ],
             1
           )
         : _c(
@@ -5726,13 +5840,13 @@ var render = function () {
                             { attrs: { cols: "12" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Photo name*", required: "" },
+                                attrs: { label: "Photo label*", required: "" },
                                 model: {
-                                  value: _vm.key,
+                                  value: _vm.labelToSearch,
                                   callback: function ($$v) {
-                                    _vm.key = $$v
+                                    _vm.labelToSearch = $$v
                                   },
-                                  expression: "key",
+                                  expression: "labelToSearch",
                                 },
                               }),
                             ],
@@ -5774,7 +5888,7 @@ var render = function () {
                       attrs: { color: "primary", loading: _vm.searching },
                       on: {
                         click: function ($event) {
-                          return _vm.searchPhoto()
+                          return _vm.searchPhotos()
                         },
                       },
                     },
