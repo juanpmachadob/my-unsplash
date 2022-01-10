@@ -1,11 +1,26 @@
-# My unsplash
+# My unsplash - simple clone
 
 This project was inspired by a challenge from the [DevChallenges](https://devchallenges.io/) site. The main objective of the [challenge](https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP) is to develop an application that complies with the indicated user stories.
 
+<img src="./preview.png">
+
+### Table of contents 📃
+
+- [My unsplash - simple clone](#my-unsplash---simple-clone)
+    - [Table of contents 📃](#table-of-contents-)
+  - [Starting 🚀](#starting-)
+    - [Pre-requirements 📋](#pre-requirements-)
+    - [Installation 🔧](#installation-)
+  - [Deployment 📦](#deployment-)
+  - [Built with 🛠️](#built-with-️)
+
+
+## Starting 🚀
+  
 ### Pre-requirements 📋
 
 * [Git](https://git-scm.com/)
-* [Vue.js 2.6 via npm](https://es.vuejs.org/v2/guide/installation.html)
+* [Vue.js 2.6 via npm](https://es.vuejs.org/v2/guide/installation.html#NPM)
 * [Laravel 8 via composer](https://laravel.com/docs/8.x/installation#installation-via-composer)
 
 ### Installation 🔧
