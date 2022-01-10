@@ -6,7 +6,7 @@
           <v-spacer></v-spacer>
           <delete-dialog :index="index" :photo="photo" />
         </v-card-actions>
-        <v-card-title class="mt-auto">{{ photo.label }}</v-card-title>
+        <v-card-title class="mt-auto">{{ photo.label.charAt(0).toUpperCase() + photo.label.slice(1) }}</v-card-title>
       </div>
     </v-img>
   </v-card>

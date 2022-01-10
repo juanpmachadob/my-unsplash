@@ -5853,7 +5853,12 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c("v-card-title", { staticClass: "mt-auto" }, [
-                    _vm._v(_vm._s(_vm.photo.label)),
+                    _vm._v(
+                      _vm._s(
+                        _vm.photo.label.charAt(0).toUpperCase() +
+                          _vm.photo.label.slice(1)
+                      )
+                    ),
                   ]),
                 ],
                 1

@@ -78,7 +78,7 @@ class PhotoController extends Controller
 
         $postRef = $this->database->getReference()->update([
             $this->tableName . "/" . $newPostKey => [
-                "label" => strtoupper($request->label),
+                "label" => strtolower($request->label),
                 $optionKey => $optionValue,
                 "created_at" => now()
             ]
@@ -94,7 +94,7 @@ class PhotoController extends Controller
     public function search(Request $request)
     {
         //There is no exact function to query using '%like%'
-        $labelToFind = strtoupper($request->label);
+        $labelToFind = strtolower($request->label);
         $photos = $this->database->getReference('photos')
             ->orderByChild('label')
             ->startAt($labelToFind)
