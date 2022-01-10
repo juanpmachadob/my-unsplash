@@ -2402,6 +2402,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5484,7 +5494,42 @@ var render = function () {
               attrs: { color: "white", dense: "", elevation: "0" },
             },
             [
-              _c("v-toolbar-title", [_vm._v("My unsplash")]),
+              _c(
+                "v-toolbar-title",
+                [
+                  _c(
+                    "v-list-item",
+                    { staticClass: "pa-0" },
+                    [
+                      _c(
+                        "v-list-item-avatar",
+                        { staticClass: "mr-0" },
+                        [
+                          _c("v-icon", { attrs: { left: "" } }, [
+                            _vm._v(" mdi-image-album "),
+                          ]),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        { staticClass: "d-block" },
+                        [
+                          _c("v-list-item-title", [_vm._v("My unsplash")]),
+                          _vm._v(" "),
+                          _c("v-list-item-subtitle", [
+                            _vm._v("By Juan Pablo Machado"),
+                          ]),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("search-input"),
               _vm._v(" "),
