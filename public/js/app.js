@@ -2092,7 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2919,7 +2918,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_2__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default()));
 var app = new Vue({
-  el: '#app',
+  el: "#app",
   vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_1__["default"],
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);

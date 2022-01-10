@@ -25,7 +25,8 @@ export default {
   },
   computed: {
     getImage() {
-      var placeholderUrl = "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
+      var placeholderUrl =
+        "https://via.placeholder.com/300x200?text=Image+doesn't+exist.";
       if (this.photo.url === null) {
         this.photo.url = placeholderUrl;
       } else {
