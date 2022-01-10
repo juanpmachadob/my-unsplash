@@ -5,10 +5,7 @@
     </v-row>
     <v-row v-else-if="photos.length === 0 && !searching">
       <v-col v-for="n in 18" :key="n" cols="6" md="4">
-        <v-skeleton-loader
-          class="ma-auto rounded-lg"
-          type="image"
-        ></v-skeleton-loader>
+        <v-skeleton-loader class="rounded-lg" type="image"></v-skeleton-loader>
       </v-col>
     </v-row>
     <v-row v-else-if="photos.length === 0 && searching">
@@ -16,11 +13,14 @@
         >No photo could be found with the specified label.</v-chip
       >
     </v-row>
-    <v-row v-else>
-      <v-col v-for="(photo, index) in photos" :key="index" cols="6" md="4">
+    <masonry
+      :gutter="{ default: '24px', 700: '15px' }"
+      :cols="{ default: 3, 700: 2, 400: 1 }"
+    >
+      <div class="mb-6" v-for="(photo, index) in photos" :key="index">
         <ImageItem :photo="photo" :index="index" />
-      </v-col>
-    </v-row>
+      </div>
+    </masonry>
   </v-container>
 </template>
 

@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "vue-masonry-css": "^1.0.3",
         "vuetify": "^2.6.1"
     }
 }

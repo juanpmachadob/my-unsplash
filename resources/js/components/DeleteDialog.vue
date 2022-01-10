@@ -123,7 +123,7 @@ export default {
   computed: {
     checkConfirmation() {
       let confirmationText =
-        "delete/" + this.photo.label.toLowerCase().replace(" ", "-");
+        "delete/" + this.photo.label.toLowerCase().replaceAll(" ", "-");
       return this.confirmation == confirmationText;
     },
   },
