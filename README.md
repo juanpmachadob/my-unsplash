@@ -12,7 +12,7 @@ This project was inspired by a challenge from the [DevChallenges](https://devcha
 
 Local installation:
 
-```
+```bash
 # Clone this repository
 $ git clone https://github.com/your-user-name/your-project-name
 
@@ -32,7 +32,7 @@ $ php artisan key:generate
 
 Firebase database configuration:
 
-```
+```bash
 1. Create firebase project.
 2. Go to 'Realtime Database' and create database. (Test mode)
 3. Copy database url. (Url like 'https://project-00000-default-rtdb.firebaseio.com/')
@@ -42,29 +42,29 @@ Firebase database configuration:
     ".read": true
     ".write": true
     "photos": {
-        ".read": true,
+      ".read": true,
     	".write": true,
     	".indexOn": ["label", "created_at"]
     }
   }
 }
 ```
-```
+```bash
 5. Go to 'Storage' and create storage. (Test mode)
 6. After that, go to 'Project configuration' > 'Service account' > Click on button 'generate new private key'.
-7. Download json file and put it on the project's root path.
+7. Download json file and put it on the project''s root path.
 ```
 
 .env file setup:
 
-```
+```bash
 FIREBASE_CREDENTIALS=json-file-name
 FIREBASE_DATABASE_URL=database-url
 ```
 
 ## Deployment 📦
 
-```
+```bash
 # Run laravel
 $ php artisan serve
 
