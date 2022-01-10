@@ -1,66 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# My unsplash
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project was inspired by a challenge from the [DevChallenges](https://devchallenges.io/) site. The main objective of the [challenge](https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP) is to develop an application that complies with the indicated user stories.
 
-## About Laravel
+### Pre-requirements 📋
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* [Git](https://git-scm.com/)
+* [Vue.js 2.6](https://es.vuejs.org/v2/guide/installation.html)
+* [Laravel 8](https://laravel.com/docs/8.x/installation#installation-via-composer)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Installation 🔧
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Local installation:
 
-## Learning Laravel
+```
+# Clone this repository
+$ git clone https://github.com/your-user-name/your-project-name
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Change directory to the project path
+$ cd your-project-name
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Install dependencies
+$ composer install
+$ npm install
 
-## Laravel Sponsors
+# Copy .env file
+$ cp .env.example .env
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+# Generate key
+$ php artisan key:generate
+```
 
-### Premium Partners
+Firebase database configuration:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+```
+1. Create firebase project.
+2. Go to 'Realtime Database' and create database. (Test mode)
+3. Copy database url. (Url like 'https://project-00000-default-rtdb.firebaseio.com/')
+4. Go to 'Storage' and create storage. (Test mode)
+5. After that, go to 'Project configuration' > 'Service account' > Click on button 'generate new private key'.
+6. Download json file and put it on the project's root path.
+```
 
-## Contributing
+.env file setup:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+FIREBASE_CREDENTIALS=json-file-name
+FIREBASE_DATABASE_URL=database-url
+```
 
-## Code of Conduct
+## Deployment 📦
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+# Run laravel
+$ php artisan serve
 
-## Security Vulnerabilities
+# Run vue with npm (dev mode)
+$ npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
-## License
+## Built with 🛠️
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* [Vue.js](https://es.vuejs.org/) - Frontend framework
+* [Laravel](https://laravel.com/) - Backend framework
+* [Vuetify](https://vuetifyjs.com/en/) - Material design framework for vue
+* [Firebase database](https://firebase.google.com/) - Cloud-hosted database
+
+---
+⌨️ with ❤️ by [Juan Pablo Machado](https://github.com/Ju4npx) 😊
