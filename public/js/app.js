@@ -2790,13 +2790,19 @@ __webpack_require__.r(__webpack_exports__);
     searchPhotos: function searchPhotos() {
       var _this2 = this;
 
+      this.searching = true;
       this.axios.get("/api/photo", {
         params: {
           label: this.labelToSearch
         }
       }).then(function (res) {
         _this2.$root.$emit("getSearchPhotos", _this2.labelToSearch, res.data);
+
+        _this2.searching = false;
+        _this2.dialog = false;
       })["catch"](function (err) {
+        _this2.searching = false;
+
         _this2.$root.$emit("showToast", "An error has occurred. Try again.", 4);
 
         console.log("Error", err);

@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     searchPhotos() {
+      this.searching = true;
       this.axios
         .get("/api/photo", {
           params: {
@@ -74,8 +75,11 @@ export default {
         })
         .then((res) => {
           this.$root.$emit("getSearchPhotos", this.labelToSearch, res.data);
+          this.searching = false;
+          this.dialog = false;
         })
         .catch((err) => {
+          this.searching = false;
           this.$root.$emit("showToast", "An error has occurred. Try again.", 4);
           console.log("Error", err);
         });

@@ -21,7 +21,7 @@ class PhotoController extends Controller
 
     public function index()
     {
-        $tempPhotos = $this->database->getReference($this->tableName)->getValue();
+        $tempPhotos = $this->database->getReference($this->tableName)->orderByChild("created_at")->getValue();
         if ($tempPhotos) {
             $photos = array_map(function ($item) {
                 foreach ($item as $key => $value) {
