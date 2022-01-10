@@ -5,7 +5,7 @@
     </v-row>
     <v-row v-else-if="photos.length === 0 && !searching">
       <v-col v-for="n in 18" :key="n" cols="6" md="4">
-        <v-skeleton-loader class="rounded-lg" type="image"></v-skeleton-loader>
+        <v-skeleton-loader class="rounded-xl" type="image"></v-skeleton-loader>
       </v-col>
     </v-row>
     <v-row v-else-if="photos.length === 0 && searching">

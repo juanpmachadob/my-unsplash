@@ -1,5 +1,5 @@
 <template>
-  <v-card class="rounded-lg">
+  <v-card class="rounded-xl">
     <v-img v-if="photo" class="white--text hover-photo" :src="getImage">
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>

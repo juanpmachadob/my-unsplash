@@ -4,14 +4,14 @@
       :disabled="dialog"
       color="primary"
       outlined
-      class="mx-6 rounded-lg"
+      class="mx-6 rounded-xl"
       @click="dialog = true"
     >
       <v-icon left light> mdi-magnify </v-icon>
       Search
     </v-btn>
     <v-dialog v-model="dialog" width="400">
-      <v-card class="rounded-lg">
+      <v-card class="rounded-xl">
         <v-card-title>
           <span class="text-h5">Search photo</span>
         </v-card-title>
@@ -31,14 +31,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            class="rounded-lg"
+            class="rounded-xl"
             color="secondary"
             :disabled="searching"
             @click="dialog = false"
             >Cancel</v-btn
           >
           <v-btn
-            class="rounded-lg"
+            class="rounded-xl"
             color="primary"
             :loading="searching"
             @click="searchPhotos()"

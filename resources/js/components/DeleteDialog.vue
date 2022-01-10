@@ -2,7 +2,7 @@
   <div>
     <v-btn
       :disabled="dialog"
-      class="rounded-lg"
+      class="rounded-xl"
       color="red darken-2"
       outlined
       @click="dialog = true"
@@ -10,7 +10,7 @@
       <v-icon>mdi-delete</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="500px" persistent>
-      <v-card class="rounded-lg">
+      <v-card class="rounded-xl">
         <v-card-title>
           <span class="text-h5">Delete photo</span>
         </v-card-title>
@@ -19,7 +19,7 @@
             <v-row>
               <v-col cols="12" align="center">
                 <v-img
-                  class="rounded-lg"
+                  class="rounded-xl"
                   max-width="250px"
                   :src="photo.url"
                 ></v-img>
@@ -46,7 +46,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            class="rounded-lg"
+            class="rounded-xl"
             color="secondary"
             :disabled="deleting"
             @click="dialog = false"
@@ -54,7 +54,7 @@
           >
           <v-btn
             ref="test"
-            class="rounded-lg"
+            class="rounded-xl"
             color="danger"
             :dark="checkConfirmation"
             :disabled="!checkConfirmation"

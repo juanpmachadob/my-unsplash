@@ -9,6 +9,7 @@
     absolute
     top
     right
+    rounded="pill"
     class="fixed-pos"
   >
     {{ toast.message }}

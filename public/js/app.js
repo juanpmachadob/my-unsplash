@@ -2855,6 +2855,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Toast",
   data: function data() {
@@ -5226,7 +5227,7 @@ var render = function () {
       _c(
         "v-btn",
         {
-          staticClass: "rounded-lg",
+          staticClass: "rounded-xl",
           attrs: { disabled: _vm.dialog, color: "success" },
           on: {
             click: function ($event) {
@@ -5258,7 +5259,7 @@ var render = function () {
         [
           _c(
             "v-card",
-            { staticClass: "rounded-lg" },
+            { staticClass: "rounded-xl" },
             [
               _c(
                 "v-form",
@@ -5414,7 +5415,7 @@ var render = function () {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "rounded-lg",
+                          staticClass: "rounded-xl",
                           attrs: {
                             color: "secondary",
                             type: "button",
@@ -5432,7 +5433,7 @@ var render = function () {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "rounded-lg",
+                          staticClass: "rounded-xl",
                           attrs: {
                             color: "success",
                             type: "submit",
@@ -5593,7 +5594,7 @@ var render = function () {
       _c(
         "v-btn",
         {
-          staticClass: "rounded-lg",
+          staticClass: "rounded-xl",
           attrs: { disabled: _vm.dialog, color: "red darken-2", outlined: "" },
           on: {
             click: function ($event) {
@@ -5620,7 +5621,7 @@ var render = function () {
         [
           _c(
             "v-card",
-            { staticClass: "rounded-lg" },
+            { staticClass: "rounded-xl" },
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "text-h5" }, [
@@ -5642,7 +5643,7 @@ var render = function () {
                             { attrs: { cols: "12", align: "center" } },
                             [
                               _c("v-img", {
-                                staticClass: "rounded-lg",
+                                staticClass: "rounded-xl",
                                 attrs: {
                                   "max-width": "250px",
                                   src: _vm.photo.url,
@@ -5712,7 +5713,7 @@ var render = function () {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "rounded-lg",
+                      staticClass: "rounded-xl",
                       attrs: { color: "secondary", disabled: _vm.deleting },
                       on: {
                         click: function ($event) {
@@ -5727,7 +5728,7 @@ var render = function () {
                     "v-btn",
                     {
                       ref: "test",
-                      staticClass: "rounded-lg",
+                      staticClass: "rounded-xl",
                       attrs: {
                         color: "danger",
                         dark: _vm.checkConfirmation,
@@ -5800,7 +5801,7 @@ var render = function () {
                 { key: n, attrs: { cols: "6", md: "4" } },
                 [
                   _c("v-skeleton-loader", {
-                    staticClass: "rounded-lg",
+                    staticClass: "rounded-xl",
                     attrs: { type: "image" },
                   }),
                 ],
@@ -5868,7 +5869,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "rounded-lg" },
+    { staticClass: "rounded-xl" },
     [
       _vm.photo
         ? _c(
@@ -5944,7 +5945,7 @@ var render = function () {
       _c(
         "v-btn",
         {
-          staticClass: "mx-6 rounded-lg",
+          staticClass: "mx-6 rounded-xl",
           attrs: { disabled: _vm.dialog, color: "primary", outlined: "" },
           on: {
             click: function ($event) {
@@ -5976,7 +5977,7 @@ var render = function () {
         [
           _c(
             "v-card",
-            { staticClass: "rounded-lg" },
+            { staticClass: "rounded-xl" },
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "text-h5" }, [
@@ -6028,7 +6029,7 @@ var render = function () {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "rounded-lg",
+                      staticClass: "rounded-xl",
                       attrs: { color: "secondary", disabled: _vm.searching },
                       on: {
                         click: function ($event) {
@@ -6042,7 +6043,7 @@ var render = function () {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "rounded-lg",
+                      staticClass: "rounded-xl",
                       attrs: { color: "primary", loading: _vm.searching },
                       on: {
                         click: function ($event) {
@@ -6101,6 +6102,7 @@ var render = function () {
         absolute: "",
         top: "",
         right: "",
+        rounded: "pill",
       },
       scopedSlots: _vm._u([
         {

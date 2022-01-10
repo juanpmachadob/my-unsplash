@@ -3,14 +3,14 @@
     <v-btn
       :disabled="dialog"
       color="success"
-      class="rounded-lg"
+      class="rounded-xl"
       @click="dialog = true"
     >
       Add a photo
       <v-icon right dark> mdi-image-plus </v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="500px" persistent>
-      <v-card class="rounded-lg">
+      <v-card class="rounded-xl">
         <v-form v-model="valid" @submit.prevent="submitPhoto()" ref="form">
           <v-card-title>
             <span class="text-h5">Add a new photo</span>
@@ -65,7 +65,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              class="rounded-lg"
+              class="rounded-xl"
               color="secondary"
               type="button"
               :disabled="uploading"
@@ -73,7 +73,7 @@
               >Cancel</v-btn
             >
             <v-btn
-              class="rounded-lg"
+              class="rounded-xl"
               color="success"
               type="submit"
               :loading="uploading"
