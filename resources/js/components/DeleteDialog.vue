@@ -29,7 +29,7 @@
                   Please, type
                   <strong
                     >delete/{{
-                      photo.label.toLowerCase().replace(" ", "-")
+                      photo.label.toLowerCase().replaceAll(" ", "-")
                     }}</strong
                   >
                   to delete.

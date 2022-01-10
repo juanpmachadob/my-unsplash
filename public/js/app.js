@@ -5626,7 +5626,7 @@ var render = function () {
                                         _vm._s(
                                           _vm.photo.label
                                             .toLowerCase()
-                                            .replace(" ", "-")
+                                            .replaceAll(" ", "-")
                                         )
                                     ),
                                   ]),
