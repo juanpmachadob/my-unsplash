@@ -5,8 +5,8 @@ This project was inspired by a challenge from the [DevChallenges](https://devcha
 ### Pre-requirements 📋
 
 * [Git](https://git-scm.com/)
-* [Vue.js 2.6](https://es.vuejs.org/v2/guide/installation.html)
-* [Laravel 8](https://laravel.com/docs/8.x/installation#installation-via-composer)
+* [Vue.js 2.6 via npm](https://es.vuejs.org/v2/guide/installation.html)
+* [Laravel 8 via composer](https://laravel.com/docs/8.x/installation#installation-via-composer)
 
 ### Installation 🔧
 
