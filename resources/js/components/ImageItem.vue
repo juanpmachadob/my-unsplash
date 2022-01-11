@@ -4,19 +4,23 @@
       <div class="d-flex flex-column photo-content" style="height: 100%">
         <v-card-actions>
           <v-spacer></v-spacer>
+          <url-button :url="getImage"/>
           <delete-dialog :index="index" :photo="photo" />
         </v-card-actions>
-        <v-card-title class="mt-auto">{{ photo.label.charAt(0).toUpperCase() + photo.label.slice(1) }}</v-card-title>
+        <v-card-title class="mt-auto">{{
+          photo.label.charAt(0).toUpperCase() + photo.label.slice(1)
+        }}</v-card-title>
       </div>
     </v-img>
   </v-card>
 </template>
-
 <script>
+import UrlButton from "./UrlButton.vue";
 import DeleteDialog from "./DeleteDialog.vue";
 export default {
   name: "ImageItem",
   components: {
+    UrlButton,
     DeleteDialog,
   },
   props: {

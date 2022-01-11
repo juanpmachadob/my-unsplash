@@ -2,8 +2,11 @@
   <div>
     <v-btn
       :disabled="dialog"
+      title="Delete photo"
       class="rounded-xl"
-      color="red darken-2"
+      color="danger"
+      small
+      elevation="2"
       outlined
       @click="dialog = true"
     >
