@@ -3,7 +3,7 @@
 
 This project was inspired by a challenge from the [DevChallenges](https://devchallenges.io/) site. The main objective of the [challenge](https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP) is to develop an application that complies with the indicated user stories.
 
-[Try demo](https://my-simple-unsplash.herokuapp.com/)
+## [Try demo](https://my-simple-unsplash.herokuapp.com/)
 
 <img src="./preview.png">
 
